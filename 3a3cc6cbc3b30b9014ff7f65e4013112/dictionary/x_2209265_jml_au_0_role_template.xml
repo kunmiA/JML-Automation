@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="745ad75bc3b3cb9014ff7f65e4013110" label="Role Template" max_length="40" name="x_2209265_jml_au_0_role_template" type="collection">
+        <element display="true" label="Job Title" max_length="40" name="job_title" type="string"/>
+        <element label="Department" max_length="32" name="department" reference="cmn_department" type="reference"/>
+        <element label="Default Roles" max_length="1024" name="default_roles" reference="sys_user_role" type="glide_list"/>
+        <element label="Default Catalog Items" max_length="1024" name="default_catalog_items" reference="sc_cat_item" type="glide_list"/>
+        <element label="Default Group" max_length="1024" name="default_group" reference="sys_user_group" type="glide_list"/>
+        <index name="index">
+            <element name="department"/>
+        </index>
+    </element>
+</database>

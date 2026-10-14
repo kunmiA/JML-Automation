@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="old_role_template" label="Old Role Template" language="en" table="x_2209265_jml_au_0_jml_event">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>old_role_template</element>
+            <help/>
+            <hint/>
+            <label>Old Role Template</label>
+            <language>en</language>
+            <name>x_2209265_jml_au_0_jml_event</name>
+            <plural/>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-10-13 19:46:05</sys_created_on>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_name>Old Role Template</sys_name>
+            <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+            <sys_update_name>sys_documentation_x_2209265_jml_au_0_jml_event_old_role_template_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-10-13 19:46:09</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="80127b13c3b7cb9014ff7f65e401317e" label="JML Event" max_length="40" name="x_2209265_jml_au_0_jml_event" type="collection">
+        <element label="Immediate" max_length="40" name="immediate" type="boolean"/>
+        <element choice="1" label="Type" mandatory="true" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Joiner" sequence="0" value="joiner"/>
+                <element inactive_on_update="false" label="Leaver" sequence="2" value="leaver"/>
+                <element inactive_on_update="false" label="Mover" sequence="1" value="mover"/>
+            </choice>
+        </element>
+        <element label="Employee" mandatory="true" max_length="32" name="employee" reference="sys_user" type="reference"/>
+        <element label="New Role Template" max_length="32" name="new_role_template" reference="x_2209265_jml_au_0_role_template" type="reference"/>
+        <element label="Request" max_length="32" name="request" reference="sc_request" type="reference"/>
+        <element label="Manager" mandatory="true" max_length="32" name="manager" reference="sys_user" type="reference"/>
+        <element label="Effective Date" mandatory="true" max_length="40" name="effective_date" type="glide_date"/>
+        <element label="Old Role Template" max_length="32" name="old_role_template" reference="x_2209265_jml_au_0_role_template" type="reference"/>
+        <element choice="3" default="new" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Cancelled" sequence="4" value="cancelled"/>
+                <element inactive_on_update="false" label="Awaiting Review" sequence="2" value="awaiting_review"/>
+                <element inactive_on_update="false" label="Complete" sequence="3" value="complete"/>
+                <element inactive_on_update="false" label="In Progress" sequence="1" value="in_progress"/>
+                <element inactive_on_update="false" label="New" sequence="0" value="new"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" type="string"/>
+        <index name="index">
+            <element name="employee"/>
+        </index>
+        <index name="index2">
+            <element name="manager"/>
+        </index>
+        <index name="index3">
+            <element name="new_role_template"/>
+        </index>
+        <index name="index4">
+            <element name="old_role_template"/>
+        </index>
+        <index name="index5">
+            <element name="request"/>
+        </index>
+    </element>
+</database>
