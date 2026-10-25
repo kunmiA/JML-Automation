@@ -18,6 +18,7 @@
             <choice>
                 <element inactive_on_update="false" label="Cancelled" sequence="4" value="cancelled"/>
                 <element inactive_on_update="false" label="Awaiting Review" sequence="2" value="awaiting_review"/>
+                <element inactive_on_update="false" label="Partially Complete" sequence="6" value="partially_complete"/>
                 <element inactive_on_update="false" label="Complete" sequence="3" value="complete"/>
                 <element inactive_on_update="false" label="In Progress" sequence="1" value="in_progress"/>
                 <element inactive_on_update="false" label="New" sequence="0" value="new"/>

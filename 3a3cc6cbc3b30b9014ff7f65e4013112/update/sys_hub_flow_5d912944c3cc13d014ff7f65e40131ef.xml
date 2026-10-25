@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=802213000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>30000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Automates onboarding when a New Starter Request is submitted. It looks up the role template for the job title, creates the user account, logs a Joiner event, grants the template’s groups and roles, routes any extra access to the manager for approval, and creates fulfillment tasks for equipment and software.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>jml_joiner_flow</internal_name>
+        <label_cache>[{"name":"670dfae9-8c3f-4fc7-a369-8408f4335c3b.record","label":"4 - Create Record➛JML Event Record","reference":"x_2209265_jml_au_0_jml_event","reference_display":"JML Event","type":"reference","base_type":"reference","usedInstances":{"3631884a-5da3-4afa-bcbc-e74eccd4c3f2":["record"],"f8890847-12e1-4857-9f0a-6ea896f5b85f":["record"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.start_date","label":"1 - Get Catalog Variables➛start_date","reference":"","reference_display":"start_date","type":"glide_date","base_type":"glide_date","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["effective_date"]},"attributes":{"catalogType":"9","catalogTypeLabel":"Date"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.last_name","label":"1 - Get Catalog Variables➛last_name","reference":"","reference_display":"last_name","type":"string","base_type":"string","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["last_name","user_name","email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":[null],"97fad083-7c95-4645-a641-29a8065c51fa":[null]},"attributes":{"catalogType":"6","catalogTypeLabel":"Single Line Text"}},{"name":"f1468ecd-d071-4d24-9324-70db1ffc546f.record","label":"3 - Create Record➛User Record","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.first_name","label":"1 - Get Catalog Variables➛first_name","reference":"","reference_display":"first_name","type":"string","base_type":"string","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["first_name","user_name","email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":[null],"97fad083-7c95-4645-a641-29a8065c51fa":[null]},"attributes":{"catalogType":"6","catalogTypeLabel":"Single Line Text"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.manager","label":"1 - Get Catalog Variables➛manager","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["manager"],"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["manager"],"0816f11f-7946-4fec-b014-fa82853aeeb2":["approval_conditions"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"0816f11f-7946-4fec-b014-fa82853aeeb2.approval_state","label":"13 - Ask For Approval➛Approval State","reference_display":"Approval State","type":"choice","base_type":"choice","choices":[{"label":"-- None --","value":"","order":0.0},{"label":"Not Yet Requested","value":"not requested","order":1.0},{"label":"Requested","value":"requested","order":2.0},{"label":"Approved","value":"approved","order":3.0},{"label":"Rejected","value":"rejected","order":4.0},{"label":"Cancelled","value":"cancelled","order":5.0},{"label":"No Longer Required","value":"not_required","order":6.0},{"label":"Skipped","value":"skipped","order":7.0}],"usedInstances":{"608712fd-b689-4720-a75d-2609fe312c7f":["condition"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title.job_title","label":"1 - Get Catalog Variables➛job_title➛Job Title","reference":"","reference_display":"Job Title","type":"string","base_type":"string","parent_table_name":"x_2209265_jml_au_0_role_template","column_name":"job_title","usedInstances":{"8cae52fa-8678-4861-befe-b0e840d4faa2":[null,"conditions"],"f1468ecd-d071-4d24-9324-70db1ffc546f":["title"]}},{"name":"trigger.request_item.request","label":"Trigger - Service Catalog➛Requested Item Record➛Request","reference":"sc_request","reference_display":"Request","type":"reference","base_type":"reference","parent_table_name":"sc_req_item","column_name":"request","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["request"]}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.manager.email","label":"1 - Get Catalog Variables➛manager➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":["ah_to"],"97fad083-7c95-4645-a641-29a8065c51fa":["ah_to"]}},{"name":"undefined","label":" - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record","usedInstances":{},"attributes":{}},{"name":"0c014cfb-88fb-49b3-83c6-3bbbc4e93026.item","label":"6 - For Each➛Group Record","reference":"sys_user_group","reference_display":"Group","type":"reference","base_type":"reference","usedInstances":{},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"ddb61f29-0a27-4b13-b2ee-70c1fc6ea4a7.Records","label":"8➛Catalog Item Records","reference":"sc_cat_item","reference_display":"Catalog Item","type":"records","base_type":"records","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.error_message","label":"2 - Look Up Record➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","usedInstances":{},"attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"87687532-9e3d-4497-a88e-90f45bfb9adb"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title","label":"1 - Get Catalog Variables➛job_title","reference":"x_2209265_jml_au_0_role_template","reference_display":"Role Template","type":"reference","base_type":"reference","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["title"],"8cae52fa-8678-4861-befe-b0e840d4faa2":[null]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title.sys_id","label":"1 - Get Catalog Variables➛job_title➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_2209265_jml_au_0_role_template","column_name":"sys_id","usedInstances":{"8cae52fa-8678-4861-befe-b0e840d4faa2":[null]}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.Record.default_group","label":"2 - Look Up Record➛Role Template Record➛Default Group","reference":"sys_user_group","reference_display":"Group","type":"glide_list","base_type":"glide_list","usedInstances":{"0c014cfb-88fb-49b3-83c6-3bbbc4e93026":["items"]},"attributes":{}},{"name":"trigger.request_item","label":"Trigger - Service Catalog➛Requested Item Record","reference":"sc_req_item","reference_display":"Requested Item","type":"reference","base_type":"reference","usedInstances":{"f5783d9b-a001-4659-8ab6-fc453863e653":["requested_item"],"0816f11f-7946-4fec-b014-fa82853aeeb2":["record"],"d0f75ede-9406-4169-8151-dff76a6af4a4":["ah_requested_item"],"62c087be-f6b5-49a0-869d-676f0b7ac060":["ah_requested_item"]},"attributes":{"default_search_field":"number"}},{"name":"02464031-47dd-425f-a21d-498318138892.Table","label":"5 - Look Up Record➛Group Table","reference":"sys_user_group","reference_display":"Group","type":"table_name","base_type":"table_name","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","filter_table_source":"v_cluster_transaction"}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.Record","label":"2 - Look Up Record➛Role Template Record","reference":"x_2209265_jml_au_0_role_template","reference_display":"Role Template","type":"reference","base_type":"reference","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["new_role_template"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.additional_access_needed","label":"1 - Get Catalog Variables➛additional_access_needed","reference":"","reference_display":"additional_access_needed","type":"multi_small","base_type":"multi_small","usedInstances":{"08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2":["condition"]},"attributes":{"catalogType":"2","catalogTypeLabel":"Multi Line Text"}},{"name":"060b8556-5cd3-4415-99e4-7165261769e1.Records","label":"8 - Look Up Records➛Catalog Item Records","reference":"sc_cat_item","reference_display":"Catalog Item","type":"records","base_type":"records","usedInstances":{"b0559ffb-e39a-4e6a-8222-69b7bb5ef973":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b0559ffb-e39a-4e6a-8222-69b7bb5ef973.item.name","label":"9➛Catalog Item Record➛Name","reference":"","reference_display":"Name","type":"translated_text","base_type":"translated_text","parent_table_name":"sc_cat_item","column_name":"name","usedInstances":{"62c087be-f6b5-49a0-869d-676f0b7ac060":["ah_short_description"]}}]</label_cache>
+        <master_snapshot>a6139a0cc38453d014ff7f65e4013185</master_snapshot>
+        <master_snapshot_digest/>
+        <name>JML Joiner Flow</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>9b13da0cc38453d014ff7f65e401313e</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:29:47</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5d912944c3cc13d014ff7f65e40131ef</sys_id>
+        <sys_mod_count>236</sys_mod_count>
+        <sys_name>JML Joiner Flow</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name>sys_hub_flow_5d912944c3cc13d014ff7f65e40131ef</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:04</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>67c591c7c340531014ff7f65e4013115</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_variable_value action="delete_multiple" query="document_key=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_flow_catalog_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <catalog_item/>
+        <name/>
+        <published_version/>
+        <run_flow_in/>
+        <sys_class_name>sys_flow_catalog_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:12</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9b13da0cc38453d014ff7f65e401313e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-16 20:33:46</sys_updated_on>
+        <trigger_definition/>
+    </sys_flow_catalog_trigger>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN9191a188c3cc13d014ff7f65e40131da"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>5d912944c3cc13d014ff7f65e40131ef</id>
+        <name>JML Joiner Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:29:47</sys_created_on>
+        <sys_id>9191a188c3cc13d014ff7f65e40131da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 16:29:47</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=9191a188c3cc13d014ff7f65e40131da"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN552229c8c3cc13d014ff7f65e40131aa,852229c8c3cc13d014ff7f65e401310b"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>sc_req_item</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</model>
+        <model_id>5d912944c3cc13d014ff7f65e40131ef</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_5d912944c3cc13d014ff7f65e40131ef</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:32:15</sys_created_on>
+        <sys_id>552229c8c3cc13d014ff7f65e40131aa</sys_id>
+        <sys_mod_count>73</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:19:59</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=552229c8c3cc13d014ff7f65e40131aa"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>default_search_field=number,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_item</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Request Item</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</model>
+        <model_id>5d912944c3cc13d014ff7f65e40131ef</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_5d912944c3cc13d014ff7f65e40131ef</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference display_value="" name="sc_req_item">sc_req_item</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:32:14</sys_created_on>
+        <sys_id>852229c8c3cc13d014ff7f65e401310b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 20:06:03</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=852229c8c3cc13d014ff7f65e401310b"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT INf940f10cc34053d014ff7f65e40131dc"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment>Starts when a New Starter Request is ordered from the Service Catalog.</comment>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <name>Service Catalog</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 17:33:59</sys_created_on>
+        <sys_id>f940f10cc34053d014ff7f65e40131dc</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:15:58</sys_updated_on>
+        <trigger_definition display_value="Service Catalog">c43a1011c36813002841b63b12d3ae15</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/61T32vbMBD+V4KeNsjATtZm8dsYFALdCk3Xl1KMIp0SMVlyJdmtF/q/7y62E7fzxqB7knS/vu/uPt3tmeEbMCxj15WdXBj3OFlZNmXaRvCWm5umBHSKndMC0N5eLnWILLvbM7WGhwosurIP6ZSpW24qilfOw9a7ykrMUZcDCEUQGs8XEauCbymP7mswICJIliluAqDlexi+vuoQtN12hufpn1lsuPjxdxaniMk7CYpXJr5/I5/7KSu4lTw635yCvCtuoCgNj3A0Oi/BsyxNkimrifK6CSvZolpeEL6vbE5cc01Lqbu+8Cp1wGLN7ckidtpIDxb3ghRK7rFCpPr7Vy5NEOfJMhGL2XKxmCXzeZKos40SSojFpzQ5T8+WWHBcGKPE4iuVDDuDpwhWDgb2+3Q8cHllzcmwQ/m1XRX8KeifWPxjQnEKfLtn8h2feTeNfhDEIhz0af595/WYaLpGElLZWK0XKq7HxN+PgnTRoX35/wTTNxOcEcF2dFdl1A7Fwua0Wr4xlBOa0C7cg8CUPHq93WIiJjlTFfbbmC469gOVVgG3BSUpglbcf4/1zj1e9+u80PZAqXMaJ7g5vnhE5E0VaX57xmXNMYMUHT1iPB9UkT9UlHH4Jz1WfuiIAoLwuoyfRdQ1HD/tL0m7zRsJBQAA</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>service_catalog</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN1f8c9da5c30c9fd014ff7f65e40131f9,224add60c30857d014ff7f65e40131f3,2d7d9569c30c9fd014ff7f65e4013187,5a5e19e9c30c9fd014ff7f65e401319c,714369a4c34857d014ff7f65e40131c4,72abf76dc3c0131414ff7f65e4013108,799383acc38497d014ff7f65e40131d7,966f8204c38453d014ff7f65e4013145,ad6fb5ccc3c053d014ff7f65e401311f,c70ea9ecc38857d014ff7f65e401319e,f2be4680c38453d014ff7f65e4013169"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment>Finds the equipment and software items listed on the template.</comment>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>8</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 07:58:42</sys_created_on>
+        <sys_id>1f8c9da5c30c9fd014ff7f65e40131f9</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>060b8556-5cd3-4415-99e4-7165261769e1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW2vbMBT+K8avM8FO0rTrnkZKodALtKUvWxGyLCeisuVZctK05L/v6GLHS9yQQAIte2p1bvrO5fNRfr37LPHP/bN0GIY4Ojk7DcPBIAxHowHBURwPRiQO42HsB36OMwqWCsecwnGGeaXPkiCCFWKKZiBNmCw4Xjw55RgrzMXEu7JaMmU8KWnun/96DvwClxBS0dI/f19T7YqJ45hyMH10oNYwqkXRHJHRWdl12827tQpRJhpKGPj0VdE8oYAhxVzSwM9wnmAlykUjKSlO7nK+EkxZriAixJlSXtj/Mvwq2RsgOAu1R0ohP0KtrjkiVzIrTi+gYg+qrIiqSmdKpoIRKm1lEpriiqtxW2YN7grFRG5dbAGst+BVlt/awvhNgLpDIKkkgKCFTlnn4BJKH6Zifl+jvGS5qY5TckEwb05YqZLFldJ43n3KaQaBUIaLguUTVJRixowzYMl6Ew6HXsrFHC6VbJL3MNHAe1Bh3LsE+YURP+GS6SxuIAw4AyDGYVaQbaYUVWlKOUOEV9IoSpxLG8tfBr5cyDHHUq4yh5KjP5XGbevgMka2aNqFlKxQPyHEjLrklsFOBDkJV8NHRJ4wjUK2WbKQiCVXt5sUaWkOSQ+DqKbHuA2pC6YjyobsuiuAI0p0BKJARl+JKnD552PK/rNvS7BBAJudlZkZXA0BnLbZwnXQk9z7XYVh/7SecHvyvnlpgkwKqI8QF+IFVQUqKYG56rk/rvJ6s+j9YbaL/OEvlw0fyenW6T9ZDboUJQQyrW0RcpOIexNwBwg1Ae80Zbx48REqx7+UUZ50LapLrVhbVP3/fVF9SvYBoATZPrKcs9y8PwDo4Wj5714Kt2+B72sTZwattZa0DEuyyQbsKeG97c2JHeDUnHiAu71Hi6cDYr2SzMisr6Na6KgwOAIVBv3DUOG9SbgpaUf168en7mtt/6bt8bo9DGPLIVp2UW2vO6N97+wvN6k82IvL7bGzmosPpu/Ab9MPuBkc82MwBVd3H7JMRnOWTKha3V5bJULNMX/p0ruJQ3WjTHpHeOcOtxJ4FK3ICkyBrS2hee2HbgQvuM2vSRRY8X4fkx2w1OW4wa/efQOmE6H7oADn6cT0pv1FuWqkbsiHR3ndftrtWretk411977ED8XDUeL5Lzq+e+0dEQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=1f8c9da5c30c9fd014ff7f65e40131f9"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Logs a Joiner event as In Progress, linked to the user, manager, template and request. This is the audit record.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 05:14:54</sys_created_on>
+        <sys_id>224add60c30857d014ff7f65e40131f3</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>670dfae9-8c3f-4fc7-a369-8408f4335c3b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VS2/bMAz+K4XOsSE/4ji5De16GPoA2qGXrTVoi05UyI/KctosyH8fbctp0LVYB2yHAvMhsEh+1PfRJPNty6RgCxZ5yKdzL8oCLwh8zv049NIoSD1fBIAYsgkroUCKNJAqTPrDhK1BtZ3xKfF9PvejaXJfqATahPcvuMbSUJiQTa1gc2Ojv5yfHX22rmwlldBYssW32wmrQVNig5otti9c76WpIEVFoV87nm/QNpv6VdvZIfboYnBUWnR8+IThk8FSIBHJQTU4YQWUAkylN2xhdEsGjSAuS7XZR6wkqVwwSrNCVQ9vBTw18gcRiHmHyJE0Zjj49sfE1mww5ydg4JruyEyrbWi2qmSGzVAdgTm0yhwf2oaAy9rIqhwgvWCLrlRblBdDcdg+wfiJyNI2RALrTnGnwQrKr1fV49XI8lSWfXGsU1UZqP0JjNEybU3HZ8tQYUGJkgLqWpbLpNbVWvZg4lK4S0UHN1fVI13ayGXpQtYRd6nA4J6S/aQ334CWnYpzSkPg3YQ1m+ZYQdM8a6EiJg9tx2RQZjUkQxk6SKZlbT7RBWu0dHeTcRIE8vmbLealzy3VN39zMAVdC31vOQ/EfSVL1HeNAWMtsuwULzU2zR0Wtao2aD3bbe6FUYyZcASfeU4o/NCZB/Qz4yL18jybhlHuasyoE3e7O2o6WKLeg6ezOBDz1AHOCRxN504MaeTkWTgN4ijAaBq4FkNozHPsdSdiz+2dSUiNNj2M8pT4mOiKxsd0ag5SxRng1M/BiaNZ7IRx5DkptYuTcoxDLsIcwHevRjEaH6iGZgRTwyyJp2vNiaTs42G3+3WT/K/4P6/4Hy7o30/PuKBPJSrRvDJO43a2MpNhvF5saOs8urFOu6W9v7+lvYj3zwfa1YPMD7+qD/6f31jatz8BoA/tDsAIAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=224add60c30857d014ff7f65e40131f3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Catalog Task">af51fd0e73141300612c273ffff6a785</action_type>
+        <action_type_parent display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type_parent>
+        <attributes/>
+        <comment>Raises one fulfilment task per item, assigned to the fulfiller group.</comment>
+        <compiled_snapshot>af51fd0e73141300612c273ffff6a785</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>10</order>
+        <parent_ui_id>b0559ffb-e39a-4e6a-8222-69b7bb5ef973</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:02:40</sys_created_on>
+        <sys_id>2d7d9569c30c9fd014ff7f65e4013187</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>62c087be-f6b5-49a0-869d-676f0b7ac060</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1YWW/bOBD+K4aetoDjlS3fb90EBnbRA4iL7ENdCJQ0tIlSR0kqbtbIf9+hSNnyEcVG7CDFrp+sGXL0zfENOfq6cljkjB1Ce20auTDw2t2257r9difsDDyKvz4ZDIdO00lIDHrlwlck4OAXz03nnvBcy2WIcvkdJRGTGScPd3uKcMF4JCBxxl+/NZ2MCLSgQDjj1Y7qWEicBMBx6RcNqPHJAHoCp3rItHhP9uGQjVREGpfbdOCngiQCBEQJl9B0YpJERKXiYS0RQKLPCUeBEjk+L1ii0CCaWQDPzL+Y/JTsHwQwdPUGCuhrCEa3fvRt5IyY3hBFpmgyVLmwS8NFykKQJkoRUJJzdV2VmQWfM8XSxGwpHLa7U57HyScTH2dtYD9RVnHzVCJziVgh04HRrto40OkiXd6WzkxYUsTQKnkaEr5+IkoJFuRKw145wCFGQ35Msowlcz8T6T0rNiPkuDXn+NCiPF3iSyWbJy0Sav9amAfSmqD8phDfEcG0sx/RDG7Gt3C9p4CNYqmzjwlCBZMoFSwrY1Ogch6bjnyQ15xIuYkRJsf/kWvoJmLWad+EV28pDL1HRPdg/XtsWlYNvLoSJu5WtQr4kYNUEPlMQVxh1mqFwZrPQbTskmLB4+M+1U7m2BEAS47dlvAafxp4Ncgt1zZ1vk2124rcMq1dzzRDrA3R7IpapnmdbaZhHSDQEuIh0u25+OoUPAe36BSICBcTBlynOMnjwLDhVTiXYn78SKRZZp0uKHd+anmD2srtbxWoXKRCaUcKgzovG3ZNck4Z5+PGahW4vd6I0uAKvBG56kKfXA07nc5VfxQMgqAHdDTwWrp+Wtr0IQK+zNhp3D0iAiV3p9r/xs2W//XRsQyWWDLJfIe+01Jouds58ZQ8hrztjuu+3ZPyVzkCL3Ci1RdduFVYVLcgWeEa4kCQhaNzkebZLHddL1rNShrNnPHM+evjhwbyqCASiJnTnJn9hdLtd0d01BuFXjjUQNpdSge034Ou2/ba/V6xHH32WXTk+gMsfqswTzzbn09V2R8mZaIO5K68N0OMrivwTS537s5W2bizStsZvAt0hn5vrzNsLqaHGsQ1UoSn88YXs+QNNAtzm/nlewVLslzJ1vag9Uz/oLVFGXS2anBJmKp0D3efqebifiozjgBRMuNvA2EPk2VFkKYcSLJLB8zv7xMLzVKhewEqdN/uCWkHrcODpFX+R4/QZ6qv8qll3XND08J2B8MzDIBHgOG7Tb5sqNtz4FNgT58FexegyoFhEHHWDYM7Xr6BY+Plo6D5uPU6gyBOFUtfFu+/3BQ4CGrLt/I5sKzKe4tTnpdHRwApeVQW1l0FSQ3IchLjuVwEefgd1A6DplrT+KNUWRL1/x/KXnyiMOlTbGkYxU1G/ASgiOn67nExAqW5wKCWAdCtyk+LyCCGpVMSA1VLusH32zvUsCTkeQR+jOFhAt+8VoOqfAbV4aoAA+EvhXn72Qn77V/9RlkMaRgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2d7d9569c30c9fd014ff7f65e4013187"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment>Notifies the manager that the new starter’s account is set up and the fulfilment tasks have been raised.</comment>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>11</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:06:33</sys_created_on>
+        <sys_id>5a5e19e9c30c9fd014ff7f65e401319c</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>97fad083-7c95-4645-a641-29a8065c51fa</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1a3W7bNhh9FULXlitblmynV12CbAX6MzRBd9EUBkVSNhdaVEUqjhsE2P0eYcAebk+yj/q3nThy6nYJ5hs75s/H830854iS8unG4tQ6sgZ05PhBOMBDx+27jjPqj8eBOw6d0XDs9Ai1OlaE5wxGJozIxPy+wiI1DfAn5SoWePmxbiEzLmjCIuvo0+eOFeMEJmuWWEc3a11tVxc4YAKGnuNkyjT6UKJYR6WXsflNJUnnLNITXja+KQKcFD3o9Qn0wCSDyulY7FqziDKAE2KhWMea44hiLZNl1ZIwTN9Hom6Y8UhDyFdKScKxZgrpGUNsjrlAC65nCKMcWBeWmjERtx48x9eKf4VM3L5ZN2RQMGIS4xHhFOBbjeZJUX/ofl13hydY4zOdpESnSbUtkhOm8tJTFuJU6ONmWz7gfay5jPIpGgeinC1FOo/e5RW3qgCNbU8VgGGxKaSpDCwOVQrPZnLxoQR7yqOs5EUJhSRYVL/CM4YTMjvlTBheROk8gLEdC2ud8CDVBiYwSMCoep1JBtWsBSOZYNm+z3Ec82g6iRN5xbMFAf68OxXwoxsKuYD5ik+jLiYm1y5sNe6eQvtJ1vwRJ9wk/hbCwOTbjqWW6lhgper0of6TL6lBnxdjFY6ZPcnYaSaThMf6FSx1xYpkbzuF9HrjbeSng5rkjZh7lV8LBLX8DBvuRlRIb6PtTXMuepd3FMLr7Si8nFGF7s5BPzr3g1w5SBfwCq3dP6DS18hZ1dc9unoaeqpU0lpQq8L5PuIAFqlJzvAit2zxR4jmIak4vh8EfuAN3ZqoYxLSYRD6eEjcmpgLMNhkjpPLSWawDb30NgVTWMduommBpRQNmLJIKUO/laC24SxUFEgJLhetSwiQvjjNqltJqP9N166cmkhLBJsplnARqiCZxvoSpWdYI66Qgt3qonOJeJFVY0YHLWWK5qnSMExDz4r4GhfBH7xqpfbB01V7QcKi9eROhj4LO9i/7L3t1ydcywnPJlo2xH5zE3rDkUvHgY0dp2cPfG9sj3Dg2yEZeO7Id5nvuV2QC56ypJtx7vYWbVrE4wPt5iotUq0uxXIz78I8FOxyNF3zjrOysfANd7tv5FfaTdvIBbx6CXWerqyei2oMcMHnPKNGrvf9C4luZRdzVghFyH5PmS0WL6l9fLyJZBdqDx55STxw+/lyu7f1GQLzVxgV7JvcLVYvyf3TGruDnentHej9v6O3t51gZIVSKg1+Z0Q3KP6OLZCCczFgRJjA9ig4SSPIf5rA35sCeHD8jseah9GX8jirsN+Vzy4y8Q8HnCekkv1LAm8lVdhfdVlJlw09XKSO45IYGcy25tFyTlgipQ6gMJdZJ72wLvJhzDxGAhHINNIolAnKJ6sYR4iYfMrxJtgEpGAyiLkQFxZoaClY1Z8T5QikJHjEXkI/kREwVDPKsx0vR2aJQncGz4TKcJe9cDNCJzrBkQI08yO4DSF+6Pm2O4SPwcjFNh558NGjg9BlrB+67u1tmcx28LAUygQfa1UvMQnTKNtjBZgAqOHSdTnR+cFpFHvGlOa0DGVE9yvEf03bpJlBsQvM2TeG7UgemmpmqTaDANy1roBKKTSP7RpsdrOWNZ7LeH1Ygaoc20M2+plpdAxjhJyiUlQqI2Hfn+qXKOSJ0tkD11bgMlsvR94bPw/xwsRoERMniVy0L33m9TYBpehdJ62s9M/ff92D8+GGezIBAyqjN+r62EXAU7WMUL33m5KahJhgyiZt6G+U1kR8bzQUyYZ6zTM2zmA8MrubF7IM8R4sF1VDURkHxZxcwrXf2N29HIHyt+de7nl2bug2B57fMeNuu4xkZpbFnv/xZ+vtyMu/25Y1Gp6a0fu+Rz3qDGz4GtgDZxDaAR37NuuFHgsIDekoeAZG3zaNg9GvGT0sf/D5/ft8XdYfYPNtyP/0bL41856jy8+wQgGD+hC4GQRr6yJz4GdfUh5n/ygCt4xIyVAvgMdgiupSwZQrls9JMFcwpYga5yE376fz/qL7+91P7Mf5n4yxHlxufy53OM0eTrMHmznYzOEw9V+7zOEwtethareXDS2eC1fv4vKnwhuPiYvXDDM9F2svGX45f/umfsUw3NubON/zXP/wkuGbX8XFC9qniYzjIrc9v477/C8TFxKgMS8AAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5a5e19e9c30c9fd014ff7f65e401319c"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent/>
+        <attributes/>
+        <comment>Finds the groups listed on the template, using a scripted query because the field holds a list.</comment>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 05:54:10</sys_created_on>
+        <sys_id>714369a4c34857d014ff7f65e40131c4</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>02464031-47dd-425f-a21d-498318138892</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX32/iOBD+V6K8HuUSAgS6T6tWnCrttdK215e9leXETrHWxFnbaZdW/O87jh1gIQVyhVNP9wQe//pm5vvGky8vPiP+uT8gwTgbjwejOAiiKAiGwyjFYZJEwzQJkiT0O36OZxRWKiE10vOCgukR83JpwyoFE2Gq4Hh+72awp4X3DPZ0yjiRNPfPv3zt+AWWcJqm0j9/2Zg6FA7HCeWw9Bbu9u4sngaI1c853CFYWo8/ua0XtVFIYqBEHZ/+0DQnFDBkmCva8Wc4J1gLOV9aJMXkJucrw5TlGk6Dc6aUF/bfDP9Q7BlujnpmR0bBv5TaueUQuWBZc3aJNb7Vskx1Kd1SC1tBZF6WDi9D2hB950iw6KzWP5v1eHM9oesbwgVEntAMl1xf/LM7w7Z39syd1sGbQjMB+fcjkyGc8Np9wctZfm2z6i8R3jfQzs5cvsK+UkGwaWFSa3LlEpfdTsXT5zobE5ZXuNwkFynmyxHWWrKk1CYuL35GUMYoJ4jlnOXmJkibIRLldAY3oBkuCpY/oEKKR1adCr7Mug8cBt2MiycTC/aQd3FqPO8CxXB3AvbLynyPJTNR+BOOgc0dc+EUtrr7kEolKzR6YuSB6tXt9Soi9BPm35rmHeNQnajKPX/R8dVcXXCs1CrYQFP0vTQxsKF30UNVoqotFYqP4MEjdYEyHKgEHO4UMCYbYrWJXuPLdiVpXUMOgFBH4cYw0kvmr6FyRcTmvFrxayGZmAnv2k7U9D5BMRkFxykmTWLfFmMrLW6LzJDuDRo7oZSatNteAjY2+3Qw3vmQjVeMYxmaQTxZwSmSNAUWKYQlRZkoc4Ksc2sCMcHOmFTaLd4WzGcKqc89Aezy9JR61WpvubqlmPb7UYvpKvNqR9xtygNHvMoRb+lIO7fbPOP9EyivfyTlrZ7ICWa8yovStFhLLJVSyFee8j0p3cGNA9/5A0GFRwX19kagSQyNDcEerEduE05Two7/WKcUJ/0eHsZRGAZBGJA4GMVxOBom2RDH/WylVoRUnkJ/ASdnQBU4HtXUqPMcbFci22S0LTkHoKopeCnyv8sg6MXaM7Agv14Naz9wV1oSITjF+UZtuYO34feJw+/4OnjH9eVfednfqouS3W3G3Joao36qRqBkf+Xse0mvDNlGNOiNQpKejeIwPutnZHg2JnhwhsfJII4ITfvZKdpkMtjZo661B6nICTN+qfWvqrlCjBjqRw0NwMZsO/UdgKxW38U6tCa49eO9afvUdED9xJxEZMF/SWbvsoE+Wp9svbO2ioMrEsBo11q4rnrFbcm3LL+6tiPvN8985RoXUA8hLsQ3VBauLei6Hxd59CBFWXzwF4uVHne2ubi/Irj16lcpQv6kPXRbjH84c0sV7sdTq/DOAdrA57RXDZs+XattG5+uwf/90/V9Nn4AiHHgCrLJVKKUVSgfUcpLVU1InCv3zXS8x+rrTy0ZyzElFgAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=714369a4c34857d014ff7f65e40131c4"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment>Sets the event to Partially Complete, because standard access was already granted and only the extra request was refused.</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>15</order>
+        <parent_ui_id>608712fd-b689-4720-a75d-2609fe312c7f</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 19:33:54</sys_created_on>
+        <sys_id>72abf76dc3c0131414ff7f65e4013108</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>f8890847-12e1-4857-9f0a-6ea896f5b85f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVy27iMBT9FeQ1RU4CFNiNyiDNqA+pHXXTVtGNfQMeOY+xHVoG8e9zkzgUtVUfiy6qYZX7ss85uYfcbJmSbMaGKHkwDcYiCqIo5DycDINkHCVBKCNADFif5ZAhdRoUhZEUr0FXdWK7HR9zmQJOjyYiSo+GqTg+gmhM4ZBP0mEUjUSUDNq53Y4mpbKlhs21P4AyYqW0NJiz2c1dn5Vg6C6Hhs22T0rvBashQU2tlx3ap+jdpqxjWYgqw9zFqkue+sm5r/R+zKlCQzWcgPcZPjjMJRKQFLTFPssgl+AKs2EzZypKGAR5kevNvmOlctcSXaEu26cMHqz6SxiGvJ5IkTgKL8c+jL1UbTqdg4MrukO4yuyVK5RA26ojMYVKu5PDXNtwUTpV5O2Ig0R304Wusvy81YbtDzh4M5UlEFjWjGsOLcH0alXcX3YgFypvxPFkdSFA7yNwzqikcjWcLUONjdoZlKXKl3FpirVqhglKNlhqCgapLu7pTquW+QBEjXtA+sJgQfl5k74Go2oSZ3QMDe/6zG7siQZrH6mQhvGfqkbSEvMU4kaFRoK42Yl6WBhVum901Ro98F3fGyMZvbZrYvq4WgdnPprjIQ5DPg3Ho/h3pmOoYt484LpW85kTfp6d9r770scs8Q6YnSV+Na//ZdjeFc9yp4ezvfO24D0x+gRPTL6SJzyhL2+Kt6zAw1f/dg92qtl+e2AD68DhbcV5JGmTnQKtNzGRKzXt9HMfvNX+MW+8A3fnjYVCLe0LRDpjIGEgbHFL7Ik5fLF37Yv7j8YnOCQY8+b3hXzy33w77v4BPkb7C1YJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=72abf76dc3c0131414ff7f65e4013108"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Ask For Approval">f8f2e9920b10030085c083eb37673abd</action_type>
+        <action_type_parent display_value="Ask For Approval">bae0a1120b10030085c083eb37673a92</action_type_parent>
+        <attributes/>
+        <comment>Sends the extra access request to the manager and pauses the flow until they decide.</comment>
+        <compiled_snapshot>f8f2e9920b10030085c083eb37673abd</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>13</order>
+        <parent_ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 12:54:57</sys_created_on>
+        <sys_id>799383acc38497d014ff7f65e40131d7</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>0816f11f-7946-4fec-b014-fa82853aeeb2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2YbY/aOBDHvwrKa+AcQkLg3apopT3dtRK77ZtlFTn2BFyZJI2TbTmO736T2HkobClbsTqttm8QHnuc/0x+44fc7yzBrZk18aMRTKcjEtqEOIT4LiO+A6Ez8SYOZcTqWzHdAI7MgCUZx/YjlUVp2O3yTKxWkA0z+FKAygORw2a/xyFcqFTS7SczEi1sLSTPILZm9w99K6UZTppDZs12B13nqpI0BIlDF7WsQ5n5Ni3bPGHFBmIUVxv/Mp5z09O7mWMPOpVySN+CbznEHFBHRKWCvrWhMad5km2tWZ4VaMiA8g+x3DYj1iLOdZxrkKn+t6HflPgHJTij0iMCDJGZbDTNwGRKm6M5zektPoPlRdYkLhEMlE4Oh4gWMn/XtekBH9JcJLF2yWkoa+9EFpv4vU6N1UzQeTGFQhGQlhGXMegAo9t18nVRi7wWcZUbE6xMGJVNi+ZIQVjkpZydBRKqZG9omop4FaRZ8igqZ5SyGa4kNoaRTL7iM5VYxUPKSt1DzC8dXqN9Xpk/0UyUQfyN06Dzvm+prXonqVJtKJjD4EtRKtGBmRCCKgs6BaUfy0SaX+FTHsFo3vcN+yE7SRlrodLTtegrFiDzFe/HtC90NQDv3ej+57F/hqqa/Tsj60ClIb9qBlXf9+BXbr33usNwb5/m3lha8DUnJ7n3ySvi3gT46sH/GfMw9hwXfyaRQ+yRTXzwfJ9NCWW+57ljp6UJFWAMVCLpVOHcLf0XWODPkFFDfmV09Ba1jh8KNOArfDHx6gD629pogB89E/hzVnrbe0vIF+LuIN/acpTxl6mN8nEfY4Fr7U1JlDcKvSnx+YBHJByMfccdUAZkAJ7tgss95trOC9QTsU+t1tx/AtdIgOyeo+qO47Lq9DyvvM5QdVRe10bWj+Sa4qqaT+0qlf/BrvISReYT8pqq7C0dqNhJ7KCzuXxOiix+ohYusLWcIaJm/0+t4hD9Q3G/Qr7zm/y3RP7YPQld55DerKssibkoFasO/3o1BrWAz8BydRVvP97vdpE78R0+DQeUEHsw9tzpwKehN4jY2HV8zwHPdYZIF8XL+H7/8O+vuR3X3v+s5nl1f8YraL4ZFBLUz16Jqfr2lGmcupXfnk1Np6n+8eW/Iryy4n8r9yl2krpo2lLGC0wQzbufEXZLS8teWrOlFScxLK3+0ipHBSVmlRlHoLimo7Lt9rpdZNS4251m68vpVlUjFVsDR0Yr63eWoCoKY7/Et7szMlLX4byA3lyn5DhJ9WWu1qmzIo5231szoJrpjzvR3YXdF9iFx7/L8BJXt6C53OAWi+vhBWvz4T9fvQH33RYAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=799383acc38497d014ff7f65e40131d7"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Creates the account with a lowercase User ID and email built from the name, the manager set and the job title filled in.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 19:50:01</sys_created_on>
+        <sys_id>966f8204c38453d014ff7f65e4013145</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>f1468ecd-d071-4d24-9324-70db1ffc546f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1W30/bMBD+Vyo/gUhD0rSh7V42gXhiTBqMF35ETnxpPTk/5jiFrur/vrOdpBWwsaJNE9L60PrOvvN3X+6+5npFOCNTEjLwJhM/TAI/CAaeNxgP/TgMYn/AAgp+TByS0wzw5IKKGiq0zQIdKZeVivTuTe15AVut0tHROGCTuE89z+8Pw9GkP6Zx2E+T4SgYhwGEo8DdhK3Xd4K+JkUXhRnqCuRWhpT1q0TyUgG7g4xy8dSd0ZzOQO50YxOD9ymuxG5ovxZxZKI2K8xDE8UXTSIlkVCHMF6Vgi6v/vP7d/hN5lwwCTmZXt86pKQSq1IgyXT1aOt3J0PQGAQePeUgWPXMqKhlqW0FGT5YBZEdHes/a4Ivm83eVbNZSKZB+Q6BBwU5A0STUlGBQ5AmRlUhl2Sqa3KIBMo+5WLZnZjzXGFSTDMHUdpVRh8q/h2B+KFnPjouBSw3AXuiM6OmB607PaGKXuBNiaplczSZFzzB4gxRDFJaC3W87bMHPpWKF7kNUTQWbXQh6iw/tzSRLkHb8ujBfosYlLpuXYktM72YF/efW5CnPDcMNSWLIqGis6hSkse10nBWBARkmCfKaFnyfBaVslhwE4xQMncm0HBTUdzjnRWf5a5umyJ3kWXqnqL/xLivqOS6iI+YBoPXDqmW1TGOSbUpBTmMvtUaiS2sKSEyLBgKzBiZYDMqH0yHtiVan8bcTZw2fnUUr8Tnkvf2UhYZwJEfRTNQUYKGKGbYbhZ2tSUKvYOeHorBkWt/0H45vBOEfVcVZ8U9yGNawd6+KwG7JYG9w5ub6uBw5jS57ff+OySiogtg7fN9hYS5u2uWptho05snsLvrPTxQlAlwsWut5x9xuw2ErNdrp32P8MEb/VQtYbgRx61R2LxL4DhFuu+f/gt+sd4dtftlNK12Xxpxeh5dK9+PfWfbsb1zu9HItvfnZXv8lgS7KejNK/ZTnTZw17c/AHDZ5jg6CwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=966f8204c38453d014ff7f65e4013145"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Get Catalog Variables">330ba3abc31013002841b63b12d3aee8</action_type>
+        <action_type_parent/>
+        <attributes/>
+        <comment>Reads the form answers (name, start date, job title, manager, extra access) so later steps can use them.</comment>
+        <compiled_snapshot>330ba3abc31013002841b63b12d3aee8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 18:40:03</sys_created_on>
+        <sys_id>ad6fb5ccc3c053d014ff7f65e401311f</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>f5783d9b-a001-4659-8ab6-fc453863e653</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VW2/aMBT+KyjPCCUkI5S3rVWlSVsrlakvVWU59jFYcy61HWiH+O87Thyg0BvSWmnT3uBcfL5z+b7crALJg0mQZmFGY5qxOAqjOAyH4yTKRnEWDXlMQaRBPyhoDhjJqKWqnJEF1ZJmCgy6FlTVzpeMaJalAl+J4zDmYZQIkYrRJ0jw0YglE2khJ2VlZVmQApb9aDTE2PSZBJ4eJAxhxESaiqcTktFhQiqEiGOsIAQTJ3sJY3qQkMQiHCfjMYtdxH6FET9I+MSHOK2EPZ1wEu4n4Ly4NJWiD9f/x3bU2NhcKq6hCCY3t/2gohov0oIOJqs911tPWtEMFIaetjfdu9656RfO3T5UzmVUbeZZzX6C9cZv/r2p8/S+dK5Sc4dy2A/g3kLBAeEJqgz0g5wWnNpSP2wsGii/LNTWMJeFxTfxnTmoqv2V03sjfyGIaBiGoUsSgN0zaN2bv8RfWmsWZ9jM1Oqa2Vr7UDYvJcOumrlxELRW9nTX1gZcNntoU6ybg88uVZ0XF+2ogs0D3WGjpTYIAirXtWvD9ySm83J51aE8l0UzIO9UJaNq849aq2VWW4cHxcoQodAExXYjeB3QzDRoUrAoKMixHMlpVcliRipdLmRTAhHng5nCPwOhyiVCM3JWDChz7Q1wFXRwjvazxtydw3d8BpPdKjgQXRdW5kAa0SOywBs1C4kHOglwtK68LJiqMTLHUUiNVTZQwZptmBvNDgjQZKnbSpuQSmOOXgAx2BKzTZPeZcpa44K7ZeyzZY0RD+ZUUWO268G7IHe1G267LL8W0m7WpTAtK/sZp7EAv4F1338ispf5FG05g1Dw6CyQjjwO3M5nIoaQorY8p3fxoUJewLI3tVQj23tXcFeDsUfrwRvwd3rwwzfQ64ThKzZgesjVjUT0pm6Xr7bspWLLz8dCcbVj9yoRvawSbvvHikQ8fKwQxhK8jUdQDcESmzslpm3uKR15fSR/pcyIKVDN5ucSlDuWZq374vNesoKipiEvrWcz2d1Vx3ZsBLfiIG6Nb5KjdxAC8RKRgG5ZoVuqAt9XgNUK5zqbgR74kCZgvT5k/vE0fx1dR/NpneUSvyV8R1OeQ348kcMPIDLDW7nrID7F1quuj4av/wo56zxriPMx9CxxP4Trsqp803+YV7e/AWtdeW6FDQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ad6fb5ccc3c053d014ff7f65e401311f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent/>
+        <attributes/>
+        <comment>Adds the new user to the group. Roles then arrive through the group, so access follows membership.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>0c014cfb-88fb-49b3-83c6-3bbbc4e93026</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 06:41:12</sys_created_on>
+        <sys_id>c70ea9ecc38857d014ff7f65e401319e</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>23e666bf-d64c-47d8-91e0-dcd99a2e76f9</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/9VTyW7bMBD9FYNnSSAtRZF9KxK4lyxAE+SSpgKXkU2AWkpRTlxD/97RZhtpgrZAgSI6EJrhzPC9R77HPdGKLEmsgC4WLJYhC8M5pfMkYiIOBZurkAMTxCMFzwErt9w0UGPc/2Bibcum+tpQGqr9nkrKIpkJP0lwiRYi9JNQxn4ohJARLEI6jwPtIG/bb00NdurLWBQnIJWv6DnzIzWP/EWIyzlVgmWZPIviLLAgS6vaFg9Xuq4M3z38Twxyo42yUJDl45NHKm5RIAeWLPevtv5UYcMFGCxdaTCqfkNyt6u6GKEjeQfpcAVD/mpsvh83Zw/jJsLtQDGPwIuDQgGiybipwSM5LxR3pd2RpbMNJixwdVuY3aFiowuHQ3HMBkw1/OX8pdY/EAiLaf91fRkgXQlDxSFMx3sa0tkld/wOT5KusWOp3JRaIrleKAUZb4y7OM0NBbeV02UxtDguzNRdmiYvbgaZyGHA9CwwgxecKqg63h2TgWZ2tymfv0wgV7roFRopm1Jyc4i4c1aLxnVw9gQM5DgnzXlV6WKdVrbc6r4ZoeTB2mAQZKZ8xjNrvS4CLjvcAarMgxXmL/v0A7e6I3GNY7C59Ui9qy8Mr+sjFdQw/d50SAZiI4W0V6GXIO2fR9csra7cJzxqCyPw1puMzYCevfvsIDq+spOZR3MjrrTzSLq2OeQCwf7ivc+d92bX0+5fuuL38CZX3PfX/jbcyRivc1envbObYWM0BP33hkg+khVGQh/eC+854Oknq58EJtwGAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c70ea9ecc38857d014ff7f65e401319e"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes/>
+        <comment>Finds the template that matches the requested job title. It defines the standard access for that role.</comment>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 19:47:03</sys_created_on>
+        <sys_id>f2be4680c38453d014ff7f65e4013169</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:47:32</sys_updated_on>
+        <ui_id>8cae52fa-8678-4861-befe-b0e840d4faa2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GegUsISaBvp1ZIK+1tpS23L3sry4md4j3HzjpOW4r47zuJE4IgBaIDqdW9EXvG/mbm+8Y239c2I/aNTWbOLJnN/GnoOJ7nOEHgxdiNIi+IIyfCE3tgC5xSsNQ44hQ+nzAvyu8XNB47s3Hgo58pR7hADlKSU6RpmnGsS1PCcvi5+lZ7fIVpa9FOx0vGiaLCvvn+Y2BnWMFGmir7Zr03dS5SjiPKwXRRQ91DrlfZ9hNVc2bs866b9cVMSEVKKM7Api+aCkIBQ4J5Tgd2igXBWqrVdkRRTO4FbweWTGhYEdZZUp6ZXyl+ydkrIJg6pUdCIb6YmrntJ6pzZoaTO6zxg1ZFrAtVm8ZLyWKam8wQmuCC69vdMWNwn2kmhXExCTDekhep+GISY28XaEoEI0UOIGhWhlzGUAeUPCzl89cG5ZyJKjv1JJcx5tsvrLViUaFLPGubcprCQijFWcbEI8qUfGKVM2BJR48cPkYJl8+wac4exQjHJfARZBiP5jB+Vw1/w4qVUfwFy4AzAGIcuIJMMXNZqCqVTyjmRV5NKCxys5a9Gdj5Kr/lOM/byCHl6FdR4jZ5qCNGJmmlS6xYpv+EJZ5oHdxm0MjGP0rGWUu+WArCShT5jnZ+yghppjn9pwB/sl4nfjj1yCwaYsdxh5PAnw2nOAqGSTzxvWng0cD3Rluv9tdmcyizyy7eU6Sn89KI9HY3MV3JquV6MPa5a4Faru4V5DpxnI8kWNj8/em1vwJNCk7I0CVH6UZaZuVSaWRyuaPDQ/H0ZvwZEBrG35cctaLVW6hqwieMctJ1Ps3Lib3zafx/P5/eJd0BEEGmjkxwJqprBwC9lg78oySM3D3GVURrVVCN4Tw+VAO2tLRee2viDDiNJh5gb2th8HRAbM6AijL7/b8ZrKXgXUEK3vgyUlhvA96mtCP7zZ2zrGtj/1ra4317IOOOg7vpklqvPd2+e443h1L2eml5l3Zm5u4N9l34SvqGNgfXbAZLcK33Q0bJ6JmRR6rb3RsrIvUz5v92zdeMQ02hqvCucL11j761op3rLUtQCpVjGdzCFY2BHDnCiqJEFoKg+v7dEqmsZMJUrmvjjkciBf0IS4JELb2kVmVtba17Hs6n42hS+SmxmkDq3XILArGqQKxtIP3C7tO+Jle5ul66fc0x41Vd4JGV7RSWKiXVGy3sREmPcOPM/nYmKPeioP57A+wSQ2cjPIH1Q7zYL9+kYoqjyRgHoee68LB1SOhMw9CdBlES4HCStGpFKBcx9FVYOQGqwPKooUZTZ+ewE5nm2rflnIGqoeCdFOUTfRxqq4QF9bUaWKeB160lkpJTLPZ6ywJOjD/mNf6ar/477i8f4p+sgi32c26GOrN+rbtEwf4W7FdBP5Vkm1JnPHVJPJyGbjicJCQYzgj2h3gW+aFHaDxJLnk9+PEb/T+hAjYWAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f2be4680c38453d014ff7f65e4013169"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN44f11419c30cdbd014ff7f65e4013176,579d69acc38857d014ff7f65e40131bf,72ceb2acc38497d014ff7f65e40131d2,bffc9129c30c9fd014ff7f65e4013174"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">30f214d9c30cdbd014ff7f65e4013184</block>
+        <comment>Checks whether the manager rejected the request.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>14</order>
+        <outputs_assigned/>
+        <parent_ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 07:54:14</sys_created_on>
+        <sys_id>44f11419c30cdbd014ff7f65e4013176</sys_id>
+        <sys_mod_count>56</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:19:59</sys_updated_on>
+        <ui_id>608712fd-b689-4720-a75d-2609fe312c7f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VTU/cMBD9Kyjn3ZXzybI31BYJiRapoF5aFE3s8a5bx05tB9iu9r93nGQBVSDUimNv8RvPzHvjecousX3o+uCv7an3am2S1debWaJMxOh7l0ht7y7sWvFz4wMYjldbfy6SVVIUMk2L9ITnjItGsLSQ8lhWJRYszdPjKpklBlqkm9waoYKyph6AWXILuo+BD/fBwRFwjt4fOfyOPKCguFC+07D98so1vlFaOJw4d+CoekCXrHZ/hMK2w1pDg5qqXQWnzJrSVVQhGUjSkPI8q/KMsWxZpE2VN2kmckDI6d4h8d1BxtHFgLysL/Yj3B86WScirZTNErwPaATRX0nQHmdJC0ZAsG77gDgEcWn0I7BRJlA5KrRB3Y1fLdx79Yu6ZGUZUySSWo5j8OFYT5McYb6xiuNlF6mOSIBGTznc6r41n0ZF8Q1QQq/D4Q0I6T3Vwy7Sj3wmcvJqY+8+HxqeKTNInYLactAPJwg0kKYP6OMTocaWCtUtdB2Nqe6cvVVDMnFpF2tNh0XcPmoaN3MBPBJf0LRgcUb4+wH+Ak5FFR+pDCWPNBvwitfDFlO54EjCfhhL/bOPhEaBk5R6nAZd8NypLpxSn1ucWO9nb2uBJ9u/27FlWlEFOT8+Kap5IZHPGyoyl7DMliXtHzbZgnTRZEDX1Dvgfv+tZywXL7vlrcq+hbtOoJRlysrn3VVUz7nr+aG9YKnsFUvFp/9rRzHG/lvqqaWUr0drTNqG5v/sqJtogbGDHzdIIFeeiFxH7Pzw74mBLa1C9N0jdGfdjyjhEdv/Bu0t9x/FBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">df9d69acc38857d014ff7f65e40131bd</block>
+        <comment>Loops through each group the lookup returned.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 06:39:19</sys_created_on>
+        <sys_id>579d69acc38857d014ff7f65e40131bf</sys_id>
+        <sys_mod_count>40</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:19:59</sys_updated_on>
+        <ui_id>0c014cfb-88fb-49b3-83c6-3bbbc4e93026</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/61TTW/bMAz9Lz4nhr/iOLkVGAoE2FagLXoZCoOWqESYLGmSnNQL8t9HxU4K9LyTxUfx8T1SPidmCHYI/tU8eC/3Otn+el8kUkeMzudEKHP6bvaS7bQPoBm+jH7Hk22yWm94vQHGyqZZrXmWV0KsRb3CKsvLvBPJItHQI92UAXtP4RHUEOPzuWGAq0LAsqnXzbJq6nzZocBll2FTZbwSAEX6jMw4nnIUMKjQ7p0Z7OVCPFx6q2B8+0907CAVdzhbt+BIdUCXbM9fUmG02CroUFHXiS7aknEa+YaLTZ5tWFnUZZFlRVPlXV12ecFLQF7TvVvlbh7Hl+lEdgrdnZc+UUWRLRL8CKg5UiMByuMi6UFzCMaNyTa4gQCHwJ+0Gu83DlIHoiOeAyo7nXr48PIvdcmzLJYIJG8Mp+Q9bOf5TjA7GMnwyQZp9IQE6NRcw4waev1zMhI3Mw33thlCBk98aKP6qGcWJ14O5vR8a/go9dXpnFSGgbpHEIKT3RDQx4Wgwp6I2h6slXrfWmeO8lpMWvp0ryhI45OlpvE5p8Ci8JSGBekj4d+u8Bs4GV38IBoqvlzdt3+G2HfyMStuJ9N0wTMnbXgguiPO4i7v8U1PTH56IhyZ9NTwNWK7218UEyOtO/5En9DJuN9R6id2+QeFgRG0jwMAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">fdc4032cc3c497d014ff7f65e40131c2</block>
+        <comment>Checks whether the requester asked for access beyond the template. If not, the flow ends here.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>12</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 12:34:00</sys_created_on>
+        <sys_id>72ceb2acc38497d014ff7f65e40131d2</sys_id>
+        <sys_mod_count>57</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:19:59</sys_updated_on>
+        <ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V227bMAz9lcLPSeB7Lm/F1gIBehmWoMAwFAYt0YkwWXIluW0W5N9H2U5bbC2KDX3cm3UokudQPPA+0K1rWmfX+tRasVHB4vvtKBDKY/S9DyqpHy70RrClsg4Uw9XOLnmwCKYxwzIGxpJZOp/yMEqralrlGaZhlEQ8DkaBghrpJtOKCye0KjpgFNyDbH3g7NEZOKESaO2JwbsWrUNOF7iwjYTdzXv32FZIbnBg3YCh+g5NsNj/FnK7BgsJJUoqt3JGqA2lC6+jCqGK5ixiSZwncRjGszQq86SMYp4AQkL3jomfjkJOLjrkbYW+H+H22Ekb7mlF4SjAR4eKE/1FBdLiKKhBcXDa7J4Qg8CvlXwGtkI5KkeFtiib/quGRyt+Upc4y3xKhaSWYR98OhbDKHuYbbVgeN14qj3ioJRDDtOyrdVVr8g/AlbQSnd8BEJaS/Ww8fQ9n4Fctdrqh6/HhudCdVKHoNQM5NMJHA2kbB1a/0QosaZCRQ1NQ2MqGqPvRZdMXOrJRtJh4vePmvrdnADzxCc0LZicE/65g2/ACK/ikspQck+zBCtY0e0xlXOGJBy6sRR3rSfUCxykFP006IJlRjTulPrc48D6MPpYE7zY//2+yqazhM/LMYRhNE7zbD6eQZmPK5ZmySxPMM+SCfA+E2TRe6BQiLRBh8NydXW9Prv8sv72p2k+tvhHOG0OWZVFYfa609L8Nae9PsA37BW/Yy+/Bn/trjAM/9vrpb2ELXqbDNq65v/srltvh76D7TeIIxOWiKw9tjz+iXxgR6vgPfgMPWjzw0t4xg6/APsU2B3TBgAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">66de1d2dc30c9fd014ff7f65e4013141</block>
+        <comment>Loops through each item the lookup returned.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>9</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:00:38</sys_created_on>
+        <sys_id>bffc9129c30c9fd014ff7f65e4013174</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:19:59</sys_updated_on>
+        <ui_id>b0559ffb-e39a-4e6a-8222-69b7bb5ef973</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TTW/bMAz9LzonhuWv1LkVGAoE2FagLXoZCkOWqESYLGmSnNYL8t9HxU4K9LiTxUfy8T1RPhE7RjfG8GLvQ1B7Q7a/3lZEmYTh+USktu/f7V7xnQmRGQ7PU9gJsiW9lLylRcvLnLdS5LSSciObGqqclnRTkRUxbACsVBGGgOGR6THFp1Pe5P1dXTfrmotyXVW0XrctVOsNbeqioZumBZo9AbdehPMZW4UKTrPp9f8Z+EFp4WEx6JhHbRE82Z6+pOLkoNOsB42DFgbsV8kzbYVsaY6ei6Ys8ry4q2jflD0tRMlANFh37dwtpr/cQWLH0N948ZNUFPmKwEcEIwAHSaYDrMjAjGDR+olsox8R8MDEo9HTreKgTEQ65DmAdvNpYB9B/cUpNM9TiwT0xmFO3sJuudIZ5gerODy6qKyZkch6vfRwq8fB/JyNpGWAZKOO12UgMgbkA5fUJz2LOPl8sO9P14EPylycLkltOdO3iMXoVT9GCGkhoGFAom5gzimz75y3R3VpRi1DttcYZOlh4tD0aDPGk/AML4tlD4h/u8CvzKvk4gfSYPP54r77M6a5s49FcTebxoLAvXLxHumOsIg7v6WXOzOF+YkI4CrgwJeE7a7/SkpMuO70q3xC79b/TlI/sfM/ZPjQ53UDAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN0ddedde9c30c9fd014ff7f65e4013119,577a0e11c34c1fd014ff7f65e40131f1,85dedde9c30c9fd014ff7f65e4013118,977a0e11c34c1fd014ff7f65e40131f0,c5dedde9c30c9fd014ff7f65e4013119"/>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>5d912944c3cc13d014ff7f65e40131ef</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:39</sys_created_on>
+        <sys_id>0ddedde9c30c9fd014ff7f65e4013119</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:39</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>a88143c7-c79e-42d2-b9fc-a5c57b37679b</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>5d912944c3cc13d014ff7f65e40131ef</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.last_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 16:40:55</sys_created_on>
+        <sys_id>577a0e11c34c1fd014ff7f65e40131f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-19 16:40:55</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>946034b4-3fb3-4654-9433-6b8e580b7833</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>5d912944c3cc13d014ff7f65e40131ef</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.last_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:39</sys_created_on>
+        <sys_id>85dedde9c30c9fd014ff7f65e4013118</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:39</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>665d5d04-5d54-404f-bd96-e1f5ebcdfd8b</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>5d912944c3cc13d014ff7f65e40131ef</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 16:40:55</sys_created_on>
+        <sys_id>977a0e11c34c1fd014ff7f65e40131f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-19 16:40:55</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>1d51a6bb-a101-43b3-82bf-61c77a7a132c</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>5d912944c3cc13d014ff7f65e40131ef</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:39</sys_created_on>
+        <sys_id>c5dedde9c30c9fd014ff7f65e4013119</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:39</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>8abc6f56-3756-483a-a85a-a1d4f3ee2f33</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_flow_variable action="delete_multiple" query="model=5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_variable_5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_5d912944c3cc13d014ff7f65e40131ef</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:32:15</sys_created_on>
+        <sys_id>592229c8c3cc13d014ff7f65e40131b9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 16:32:15</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_item</element>
+        <help/>
+        <hint/>
+        <label>Request Item</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_5d912944c3cc13d014ff7f65e40131ef</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 16:32:15</sys_created_on>
+        <sys_id>d12229c8c3cc13d014ff7f65e401317f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 16:32:15</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_5d912944c3cc13d014ff7f65e40131ef"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>30000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Automates onboarding when a New Starter Request is submitted. It looks up the role template for the job title, creates the user account, logs a Joiner event, grants the template’s groups and roles, routes any extra access to the manager for approval, and creates fulfillment tasks for equipment and software.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>jml_joiner_flow</internal_name>
+        <label_cache>[{"name":"670dfae9-8c3f-4fc7-a369-8408f4335c3b.record","label":"4 - Create Record➛JML Event Record","reference":"x_2209265_jml_au_0_jml_event","reference_display":"JML Event","type":"reference","base_type":"reference","usedInstances":{"3631884a-5da3-4afa-bcbc-e74eccd4c3f2":["record"],"f8890847-12e1-4857-9f0a-6ea896f5b85f":["record"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.start_date","label":"1 - Get Catalog Variables➛start_date","reference":"","reference_display":"start_date","type":"glide_date","base_type":"glide_date","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["effective_date"]},"attributes":{"catalogType":"9","catalogTypeLabel":"Date"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.last_name","label":"1 - Get Catalog Variables➛last_name","reference":"","reference_display":"last_name","type":"string","base_type":"string","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["last_name","user_name","email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":[null],"97fad083-7c95-4645-a641-29a8065c51fa":[null]},"attributes":{"catalogType":"6","catalogTypeLabel":"Single Line Text"}},{"name":"f1468ecd-d071-4d24-9324-70db1ffc546f.record","label":"3 - Create Record➛User Record","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.first_name","label":"1 - Get Catalog Variables➛first_name","reference":"","reference_display":"first_name","type":"string","base_type":"string","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["first_name","user_name","email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":[null],"97fad083-7c95-4645-a641-29a8065c51fa":[null]},"attributes":{"catalogType":"6","catalogTypeLabel":"Single Line Text"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.manager","label":"1 - Get Catalog Variables➛manager","reference":"sys_user","reference_display":"User","type":"reference","base_type":"reference","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["manager"],"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["manager"],"0816f11f-7946-4fec-b014-fa82853aeeb2":["approval_conditions"]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"0816f11f-7946-4fec-b014-fa82853aeeb2.approval_state","label":"13 - Ask For Approval➛Approval State","reference_display":"Approval State","type":"choice","base_type":"choice","choices":[{"label":"-- None --","value":"","order":0.0},{"label":"Not Yet Requested","value":"not requested","order":1.0},{"label":"Requested","value":"requested","order":2.0},{"label":"Approved","value":"approved","order":3.0},{"label":"Rejected","value":"rejected","order":4.0},{"label":"Cancelled","value":"cancelled","order":5.0},{"label":"No Longer Required","value":"not_required","order":6.0},{"label":"Skipped","value":"skipped","order":7.0}],"usedInstances":{"608712fd-b689-4720-a75d-2609fe312c7f":["condition"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title.job_title","label":"1 - Get Catalog Variables➛job_title➛Job Title","reference":"","reference_display":"Job Title","type":"string","base_type":"string","parent_table_name":"x_2209265_jml_au_0_role_template","column_name":"job_title","usedInstances":{"8cae52fa-8678-4861-befe-b0e840d4faa2":[null,"conditions"],"f1468ecd-d071-4d24-9324-70db1ffc546f":["title"]}},{"name":"trigger.request_item.request","label":"Trigger - Service Catalog➛Requested Item Record➛Request","reference":"sc_request","reference_display":"Request","type":"reference","base_type":"reference","parent_table_name":"sc_req_item","column_name":"request","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["request"]}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.manager.email","label":"1 - Get Catalog Variables➛manager➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["email"],"433c8ad2-e94c-4f8b-a1f2-fceecc335984":["ah_to"],"97fad083-7c95-4645-a641-29a8065c51fa":["ah_to"]}},{"name":"undefined","label":" - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record - Update Record","usedInstances":{},"attributes":{}},{"name":"0c014cfb-88fb-49b3-83c6-3bbbc4e93026.item","label":"6 - For Each➛Group Record","reference":"sys_user_group","reference_display":"Group","type":"reference","base_type":"reference","usedInstances":{},"attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"ddb61f29-0a27-4b13-b2ee-70c1fc6ea4a7.Records","label":"8➛Catalog Item Records","reference":"sc_cat_item","reference_display":"Catalog Item","type":"records","base_type":"records","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.error_message","label":"2 - Look Up Record➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","usedInstances":{},"attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"87687532-9e3d-4497-a88e-90f45bfb9adb"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title","label":"1 - Get Catalog Variables➛job_title","reference":"x_2209265_jml_au_0_role_template","reference_display":"Role Template","type":"reference","base_type":"reference","usedInstances":{"f1468ecd-d071-4d24-9324-70db1ffc546f":["title"],"8cae52fa-8678-4861-befe-b0e840d4faa2":[null]},"attributes":{"catalogType":"8","catalogTypeLabel":"Reference"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.job_title.sys_id","label":"1 - Get Catalog Variables➛job_title➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_2209265_jml_au_0_role_template","column_name":"sys_id","usedInstances":{"8cae52fa-8678-4861-befe-b0e840d4faa2":[null]}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.Record.default_group","label":"2 - Look Up Record➛Role Template Record➛Default Group","reference":"sys_user_group","reference_display":"Group","type":"glide_list","base_type":"glide_list","usedInstances":{"0c014cfb-88fb-49b3-83c6-3bbbc4e93026":["items"]},"attributes":{}},{"name":"trigger.request_item","label":"Trigger - Service Catalog➛Requested Item Record","reference":"sc_req_item","reference_display":"Requested Item","type":"reference","base_type":"reference","usedInstances":{"f5783d9b-a001-4659-8ab6-fc453863e653":["requested_item"],"0816f11f-7946-4fec-b014-fa82853aeeb2":["record"],"d0f75ede-9406-4169-8151-dff76a6af4a4":["ah_requested_item"],"62c087be-f6b5-49a0-869d-676f0b7ac060":["ah_requested_item"]},"attributes":{"default_search_field":"number"}},{"name":"02464031-47dd-425f-a21d-498318138892.Table","label":"5 - Look Up Record➛Group Table","reference":"sys_user_group","reference_display":"Group","type":"table_name","base_type":"table_name","usedInstances":{},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","filter_table_source":"v_cluster_transaction"}},{"name":"8cae52fa-8678-4861-befe-b0e840d4faa2.Record","label":"2 - Look Up Record➛Role Template Record","reference":"x_2209265_jml_au_0_role_template","reference_display":"Role Template","type":"reference","base_type":"reference","usedInstances":{"670dfae9-8c3f-4fc7-a369-8408f4335c3b":["new_role_template"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"f5783d9b-a001-4659-8ab6-fc453863e653.additional_access_needed","label":"1 - Get Catalog Variables➛additional_access_needed","reference":"","reference_display":"additional_access_needed","type":"multi_small","base_type":"multi_small","usedInstances":{"08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2":["condition"]},"attributes":{"catalogType":"2","catalogTypeLabel":"Multi Line Text"}},{"name":"060b8556-5cd3-4415-99e4-7165261769e1.Records","label":"8 - Look Up Records➛Catalog Item Records","reference":"sc_cat_item","reference_display":"Catalog Item","type":"records","base_type":"records","usedInstances":{"b0559ffb-e39a-4e6a-8222-69b7bb5ef973":["items"]},"attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b0559ffb-e39a-4e6a-8222-69b7bb5ef973.item.name","label":"9➛Catalog Item Record➛Name","reference":"","reference_display":"Name","type":"translated_text","base_type":"translated_text","parent_table_name":"sc_cat_item","column_name":"name","usedInstances":{"62c087be-f6b5-49a0-869d-676f0b7ac060":["ah_short_description"]}}]</label_cache>
+        <master>true</master>
+        <name>JML Joiner Flow</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="JML Joiner Flow">5d912944c3cc13d014ff7f65e40131ef</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:08</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a6139a0cc38453d014ff7f65e4013185</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:03</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_variable_value action="delete_multiple" query="document_key=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=a6139a0cc38453d014ff7f65e4013185^sys_idNOT INe2139a0cc38453d014ff7f65e4013187"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>a6139a0cc38453d014ff7f65e4013185</id>
+        <name>JML Joiner Flow</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:08</sys_created_on>
+        <sys_id>e2139a0cc38453d014ff7f65e4013187</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 20:06:08</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=e2139a0cc38453d014ff7f65e4013187"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=a6139a0cc38453d014ff7f65e4013185^sys_idNOT IN22139a0cc38453d014ff7f65e40131bd,66139a0cc38453d014ff7f65e4013189"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>default_search_field=number,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_item</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Request Item</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</model>
+        <model_id>a6139a0cc38453d014ff7f65e4013185</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6139a0cc38453d014ff7f65e4013185</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference display_value="" name="sc_req_item">sc_req_item</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:09</sys_created_on>
+        <sys_id>22139a0cc38453d014ff7f65e40131bd</sys_id>
+        <sys_mod_count>59</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=22139a0cc38453d014ff7f65e40131bd"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>sc_req_item</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</model>
+        <model_id>a6139a0cc38453d014ff7f65e4013185</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6139a0cc38453d014ff7f65e4013185</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>true</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:08</sys_created_on>
+        <sys_id>66139a0cc38453d014ff7f65e4013189</sys_id>
+        <sys_mod_count>121</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=66139a0cc38453d014ff7f65e4013189"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=a6139a0cc38453d014ff7f65e4013185^sys_idNOT IN7a139a0cc38453d014ff7f65e40131e1"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment>Starts when a New Starter Request is ordered from the Service Catalog.</comment>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <name>Service Catalog</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:10</sys_created_on>
+        <sys_id>7a139a0cc38453d014ff7f65e40131e1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <trigger_definition display_value="Service Catalog">c43a1011c36813002841b63b12d3ae15</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/61T32vbMBD+V4KeNsjATtZm8dsYFALdCk3Xl1KMIp0SMVlyJdmtF/q/7y62E7fzxqB7knS/vu/uPt3tmeEbMCxj15WdXBj3OFlZNmXaRvCWm5umBHSKndMC0N5eLnWILLvbM7WGhwosurIP6ZSpW24qilfOw9a7ykrMUZcDCEUQGs8XEauCbymP7mswICJIliluAqDlexi+vuoQtN12hufpn1lsuPjxdxaniMk7CYpXJr5/I5/7KSu4lTw635yCvCtuoCgNj3A0Oi/BsyxNkimrifK6CSvZolpeEL6vbE5cc01Lqbu+8Cp1wGLN7ckidtpIDxb3ghRK7rFCpPr7Vy5NEOfJMhGL2XKxmCXzeZKos40SSojFpzQ5T8+WWHBcGKPE4iuVDDuDpwhWDgb2+3Q8cHllzcmwQ/m1XRX8KeifWPxjQnEKfLtn8h2feTeNfhDEIhz0af595/WYaLpGElLZWK0XKq7HxN+PgnTRoX35/wTTNxOcEcF2dFdl1A7Fwua0Wr4xlBOa0C7cg8CUPHq93WIiJjlTFfbbmC469gOVVgG3BSUpglbcf4/1zj1e9+u80PZAqXMaJ7g5vnhE5E0VaX57xmXNMYMUHT1iPB9UkT9UlHH4Jz1WfuiIAoLwuoyfRdQ1HD/tL0m7zRsJBQAA</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>service_catalog</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=a6139a0cc38453d014ff7f65e4013185^sys_idNOT IN6485b1a0c30c57d014ff7f65e40131ee,668c15e4c30857d014ff7f65e40131ac,6885b1a0c30c57d014ff7f65e40131ec,a8d4c32cc3c497d014ff7f65e40131a0,abebf3adc3c0131414ff7f65e401314d,b6139a0cc38453d014ff7f65e40131dd,bfde9d2dc30c9fd014ff7f65e40131be,f2139a0cc38453d014ff7f65e40131e0,f3de9d2dc30c9fd014ff7f65e40131c3,fbde9d2dc30c9fd014ff7f65e40131c0,fe139a0cc38453d014ff7f65e40131de"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Adds the new user to the group. Roles then arrive through the group, so access follows membership.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>7</order>
+        <parent_ui_id>0c014cfb-88fb-49b3-83c6-3bbbc4e93026</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 07:13:48</sys_created_on>
+        <sys_id>6485b1a0c30c57d014ff7f65e40131ee</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>23e666bf-d64c-47d8-91e0-dcd99a2e76f9</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/9VTyW7bMBD9FYNnSSAtRZF9KxK4lyxAE+SSpgKXkU2AWkpRTlxD/97RZhtpgrZAgSI6EJrhzPC9R77HPdGKLEmsgC4WLJYhC8M5pfMkYiIOBZurkAMTxCMFzwErt9w0UGPc/2Bibcum+tpQGqr9nkrKIpkJP0lwiRYi9JNQxn4ohJARLEI6jwPtIG/bb00NdurLWBQnIJWv6DnzIzWP/EWIyzlVgmWZPIviLLAgS6vaFg9Xuq4M3z38Twxyo42yUJDl45NHKm5RIAeWLPevtv5UYcMFGCxdaTCqfkNyt6u6GKEjeQfpcAVD/mpsvh83Zw/jJsLtQDGPwIuDQgGiybipwSM5LxR3pd2RpbMNJixwdVuY3aFiowuHQ3HMBkw1/OX8pdY/EAiLaf91fRkgXQlDxSFMx3sa0tkld/wOT5KusWOp3JRaIrleKAUZb4y7OM0NBbeV02UxtDguzNRdmiYvbgaZyGHA9CwwgxecKqg63h2TgWZ2tymfv0wgV7roFRopm1Jyc4i4c1aLxnVw9gQM5DgnzXlV6WKdVrbc6r4ZoeTB2mAQZKZ8xjNrvS4CLjvcAarMgxXmL/v0A7e6I3GNY7C59Ui9qy8Mr+sjFdQw/d50SAZiI4W0V6GXIO2fR9csra7cJzxqCyPw1puMzYCevfvsIDq+spOZR3MjrrTzSLq2OeQCwf7ivc+d92bX0+5fuuL38CZX3PfX/jbcyRivc1envbObYWM0BP33hkg+khVGQh/eC+854Oknq58EJtwGAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6485b1a0c30c57d014ff7f65e40131ee"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Logs a Joiner event as In Progress, linked to the user, manager, template and request. This is the audit record.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 05:24:43</sys_created_on>
+        <sys_id>668c15e4c30857d014ff7f65e40131ac</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>670dfae9-8c3f-4fc7-a369-8408f4335c3b</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VS2/bMAz+K4XOsSE/4ji5De16GPoA2qGXrTVoi05UyI/KctosyH8fbctp0LVYB2yHAvMhsEh+1PfRJPNty6RgCxZ5yKdzL8oCLwh8zv049NIoSD1fBIAYsgkroUCKNJAqTPrDhK1BtZ3xKfF9PvejaXJfqATahPcvuMbSUJiQTa1gc2Ojv5yfHX22rmwlldBYssW32wmrQVNig5otti9c76WpIEVFoV87nm/QNpv6VdvZIfboYnBUWnR8+IThk8FSIBHJQTU4YQWUAkylN2xhdEsGjSAuS7XZR6wkqVwwSrNCVQ9vBTw18gcRiHmHyJE0Zjj49sfE1mww5ydg4JruyEyrbWi2qmSGzVAdgTm0yhwf2oaAy9rIqhwgvWCLrlRblBdDcdg+wfiJyNI2RALrTnGnwQrKr1fV49XI8lSWfXGsU1UZqP0JjNEybU3HZ8tQYUGJkgLqWpbLpNbVWvZg4lK4S0UHN1fVI13ayGXpQtYRd6nA4J6S/aQ334CWnYpzSkPg3YQ1m+ZYQdM8a6EiJg9tx2RQZjUkQxk6SKZlbT7RBWu0dHeTcRIE8vmbLealzy3VN39zMAVdC31vOQ/EfSVL1HeNAWMtsuwULzU2zR0Wtao2aD3bbe6FUYyZcASfeU4o/NCZB/Qz4yL18jybhlHuasyoE3e7O2o6WKLeg6ezOBDz1AHOCRxN504MaeTkWTgN4ijAaBq4FkNozHPsdSdiz+2dSUiNNj2M8pT4mOiKxsd0ag5SxRng1M/BiaNZ7IRx5DkptYuTcoxDLsIcwHevRjEaH6iGZgRTwyyJp2vNiaTs42G3+3WT/K/4P6/4Hy7o30/PuKBPJSrRvDJO43a2MpNhvF5saOs8urFOu6W9v7+lvYj3zwfa1YPMD7+qD/6f31jatz8BoA/tDsAIAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=668c15e4c30857d014ff7f65e40131ac"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes/>
+        <comment>Finds the groups listed on the template, using a scripted query because the field holds a list.</comment>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 07:13:48</sys_created_on>
+        <sys_id>6885b1a0c30c57d014ff7f65e40131ec</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>02464031-47dd-425f-a21d-498318138892</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VX32/iOBD+V6K8HuUSAgS6T6tWnCrttdK215e9leXETrHWxFnbaZdW/O87jh1gIQVyhVNP9wQe//pm5vvGky8vPiP+uT8gwTgbjwejOAiiKAiGwyjFYZJEwzQJkiT0O36OZxRWKiE10vOCgukR83JpwyoFE2Gq4Hh+72awp4X3DPZ0yjiRNPfPv3zt+AWWcJqm0j9/2Zg6FA7HCeWw9Bbu9u4sngaI1c853CFYWo8/ua0XtVFIYqBEHZ/+0DQnFDBkmCva8Wc4J1gLOV9aJMXkJucrw5TlGk6Dc6aUF/bfDP9Q7BlujnpmR0bBv5TaueUQuWBZc3aJNb7Vskx1Kd1SC1tBZF6WDi9D2hB950iw6KzWP5v1eHM9oesbwgVEntAMl1xf/LM7w7Z39syd1sGbQjMB+fcjkyGc8Np9wctZfm2z6i8R3jfQzs5cvsK+UkGwaWFSa3LlEpfdTsXT5zobE5ZXuNwkFynmyxHWWrKk1CYuL35GUMYoJ4jlnOXmJkibIRLldAY3oBkuCpY/oEKKR1adCr7Mug8cBt2MiycTC/aQd3FqPO8CxXB3AvbLynyPJTNR+BOOgc0dc+EUtrr7kEolKzR6YuSB6tXt9Soi9BPm35rmHeNQnajKPX/R8dVcXXCs1CrYQFP0vTQxsKF30UNVoqotFYqP4MEjdYEyHKgEHO4UMCYbYrWJXuPLdiVpXUMOgFBH4cYw0kvmr6FyRcTmvFrxayGZmAnv2k7U9D5BMRkFxykmTWLfFmMrLW6LzJDuDRo7oZSatNteAjY2+3Qw3vmQjVeMYxmaQTxZwSmSNAUWKYQlRZkoc4Ksc2sCMcHOmFTaLd4WzGcKqc89Aezy9JR61WpvubqlmPb7UYvpKvNqR9xtygNHvMoRb+lIO7fbPOP9EyivfyTlrZ7ICWa8yovStFhLLJVSyFee8j0p3cGNA9/5A0GFRwX19kagSQyNDcEerEduE05Two7/WKcUJ/0eHsZRGAZBGJA4GMVxOBom2RDH/WylVoRUnkJ/ASdnQBU4HtXUqPMcbFci22S0LTkHoKopeCnyv8sg6MXaM7Agv14Naz9wV1oSITjF+UZtuYO34feJw+/4OnjH9eVfednfqouS3W3G3Joao36qRqBkf+Xse0mvDNlGNOiNQpKejeIwPutnZHg2JnhwhsfJII4ITfvZKdpkMtjZo661B6nICTN+qfWvqrlCjBjqRw0NwMZsO/UdgKxW38U6tCa49eO9afvUdED9xJxEZMF/SWbvsoE+Wp9svbO2ioMrEsBo11q4rnrFbcm3LL+6tiPvN8985RoXUA8hLsQ3VBauLei6Hxd59CBFWXzwF4uVHne2ubi/Irj16lcpQv6kPXRbjH84c0sV7sdTq/DOAdrA57RXDZs+XattG5+uwf/90/V9Nn4AiHHgCrLJVKKUVSgfUcpLVU1InCv3zXS8x+rrTy0ZyzElFgAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6885b1a0c30c57d014ff7f65e40131ec"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Ask For Approval">f8f2e9920b10030085c083eb37673abd</action_type>
+        <action_type_parent display_value="Ask For Approval">bae0a1120b10030085c083eb37673a92</action_type_parent>
+        <attributes/>
+        <comment>Sends the extra access request to the manager and pauses the flow until they decide.</comment>
+        <compiled_snapshot>f8f2e9920b10030085c083eb37673abd</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>13</order>
+        <parent_ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 13:00:20</sys_created_on>
+        <sys_id>a8d4c32cc3c497d014ff7f65e40131a0</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>0816f11f-7946-4fec-b014-fa82853aeeb2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+2YbY/aOBDHvwrKa+AcQkLg3apopT3dtRK77ZtlFTn2BFyZJI2TbTmO736T2HkobClbsTqttm8QHnuc/0x+44fc7yzBrZk18aMRTKcjEtqEOIT4LiO+A6Ez8SYOZcTqWzHdAI7MgCUZx/YjlUVp2O3yTKxWkA0z+FKAygORw2a/xyFcqFTS7SczEi1sLSTPILZm9w99K6UZTppDZs12B13nqpI0BIlDF7WsQ5n5Ni3bPGHFBmIUVxv/Mp5z09O7mWMPOpVySN+CbznEHFBHRKWCvrWhMad5km2tWZ4VaMiA8g+x3DYj1iLOdZxrkKn+t6HflPgHJTij0iMCDJGZbDTNwGRKm6M5zektPoPlRdYkLhEMlE4Oh4gWMn/XtekBH9JcJLF2yWkoa+9EFpv4vU6N1UzQeTGFQhGQlhGXMegAo9t18nVRi7wWcZUbE6xMGJVNi+ZIQVjkpZydBRKqZG9omop4FaRZ8igqZ5SyGa4kNoaRTL7iM5VYxUPKSt1DzC8dXqN9Xpk/0UyUQfyN06Dzvm+prXonqVJtKJjD4EtRKtGBmRCCKgs6BaUfy0SaX+FTHsFo3vcN+yE7SRlrodLTtegrFiDzFe/HtC90NQDv3ej+57F/hqqa/Tsj60ClIb9qBlXf9+BXbr33usNwb5/m3lha8DUnJ7n3ySvi3gT46sH/GfMw9hwXfyaRQ+yRTXzwfJ9NCWW+57ljp6UJFWAMVCLpVOHcLf0XWODPkFFDfmV09Ba1jh8KNOArfDHx6gD629pogB89E/hzVnrbe0vIF+LuIN/acpTxl6mN8nEfY4Fr7U1JlDcKvSnx+YBHJByMfccdUAZkAJ7tgss95trOC9QTsU+t1tx/AtdIgOyeo+qO47Lq9DyvvM5QdVRe10bWj+Sa4qqaT+0qlf/BrvISReYT8pqq7C0dqNhJ7KCzuXxOiix+ohYusLWcIaJm/0+t4hD9Q3G/Qr7zm/y3RP7YPQld55DerKssibkoFasO/3o1BrWAz8BydRVvP97vdpE78R0+DQeUEHsw9tzpwKehN4jY2HV8zwHPdYZIF8XL+H7/8O+vuR3X3v+s5nl1f8YraL4ZFBLUz16Jqfr2lGmcupXfnk1Np6n+8eW/Iryy4n8r9yl2krpo2lLGC0wQzbufEXZLS8teWrOlFScxLK3+0ipHBSVmlRlHoLimo7Lt9rpdZNS4251m68vpVlUjFVsDR0Yr63eWoCoKY7/Et7szMlLX4byA3lyn5DhJ9WWu1qmzIo5231szoJrpjzvR3YXdF9iFx7/L8BJXt6C53OAWi+vhBWvz4T9fvQH33RYAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a8d4c32cc3c497d014ff7f65e40131a0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment>Sets the event to Partially Complete, because standard access was already granted and only the extra request was refused.</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>15</order>
+        <parent_ui_id>608712fd-b689-4720-a75d-2609fe312c7f</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 19:35:02</sys_created_on>
+        <sys_id>abebf3adc3c0131414ff7f65e401314d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:03</sys_updated_on>
+        <ui_id>f8890847-12e1-4857-9f0a-6ea896f5b85f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVy27iMBT9FeQ1RU4CFNiNyiDNqA+pHXXTVtGNfQMeOY+xHVoG8e9zkzgUtVUfiy6qYZX7ss85uYfcbJmSbMaGKHkwDcYiCqIo5DycDINkHCVBKCNADFif5ZAhdRoUhZEUr0FXdWK7HR9zmQJOjyYiSo+GqTg+gmhM4ZBP0mEUjUSUDNq53Y4mpbKlhs21P4AyYqW0NJiz2c1dn5Vg6C6Hhs22T0rvBashQU2tlx3ap+jdpqxjWYgqw9zFqkue+sm5r/R+zKlCQzWcgPcZPjjMJRKQFLTFPssgl+AKs2EzZypKGAR5kevNvmOlctcSXaEu26cMHqz6SxiGvJ5IkTgKL8c+jL1UbTqdg4MrukO4yuyVK5RA26ojMYVKu5PDXNtwUTpV5O2Ig0R304Wusvy81YbtDzh4M5UlEFjWjGsOLcH0alXcX3YgFypvxPFkdSFA7yNwzqikcjWcLUONjdoZlKXKl3FpirVqhglKNlhqCgapLu7pTquW+QBEjXtA+sJgQfl5k74Go2oSZ3QMDe/6zG7siQZrH6mQhvGfqkbSEvMU4kaFRoK42Yl6WBhVum901Ro98F3fGyMZvbZrYvq4WgdnPprjIQ5DPg3Ho/h3pmOoYt484LpW85kTfp6d9r770scs8Q6YnSV+Na//ZdjeFc9yp4ezvfO24D0x+gRPTL6SJzyhL2+Kt6zAw1f/dg92qtl+e2AD68DhbcV5JGmTnQKtNzGRKzXt9HMfvNX+MW+8A3fnjYVCLe0LRDpjIGEgbHFL7Ik5fLF37Yv7j8YnOCQY8+b3hXzy33w77v4BPkb7C1YJAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=abebf3adc3c0131414ff7f65e401314d"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Get Catalog Variables">330ba3abc31013002841b63b12d3aee8</action_type>
+        <action_type_parent display_value="Get Catalog Variables">22f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Reads the form answers (name, start date, job title, manager, extra access) so later steps can use them.</comment>
+        <compiled_snapshot>330ba3abc31013002841b63b12d3aee8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:10</sys_created_on>
+        <sys_id>b6139a0cc38453d014ff7f65e40131dd</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>f5783d9b-a001-4659-8ab6-fc453863e653</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VW2/aMBT+KyjPCCUkI5S3rVWlSVsrlakvVWU59jFYcy61HWiH+O87Thyg0BvSWmnT3uBcfL5z+b7crALJg0mQZmFGY5qxOAqjOAyH4yTKRnEWDXlMQaRBPyhoDhjJqKWqnJEF1ZJmCgy6FlTVzpeMaJalAl+J4zDmYZQIkYrRJ0jw0YglE2khJ2VlZVmQApb9aDTE2PSZBJ4eJAxhxESaiqcTktFhQiqEiGOsIAQTJ3sJY3qQkMQiHCfjMYtdxH6FET9I+MSHOK2EPZ1wEu4n4Ly4NJWiD9f/x3bU2NhcKq6hCCY3t/2gohov0oIOJqs911tPWtEMFIaetjfdu9656RfO3T5UzmVUbeZZzX6C9cZv/r2p8/S+dK5Sc4dy2A/g3kLBAeEJqgz0g5wWnNpSP2wsGii/LNTWMJeFxTfxnTmoqv2V03sjfyGIaBiGoUsSgN0zaN2bv8RfWmsWZ9jM1Oqa2Vr7UDYvJcOumrlxELRW9nTX1gZcNntoU6ybg88uVZ0XF+2ogs0D3WGjpTYIAirXtWvD9ySm83J51aE8l0UzIO9UJaNq849aq2VWW4cHxcoQodAExXYjeB3QzDRoUrAoKMixHMlpVcliRipdLmRTAhHng5nCPwOhyiVCM3JWDChz7Q1wFXRwjvazxtydw3d8BpPdKjgQXRdW5kAa0SOywBs1C4kHOglwtK68LJiqMTLHUUiNVTZQwZptmBvNDgjQZKnbSpuQSmOOXgAx2BKzTZPeZcpa44K7ZeyzZY0RD+ZUUWO268G7IHe1G267LL8W0m7WpTAtK/sZp7EAv4F1338ispf5FG05g1Dw6CyQjjwO3M5nIoaQorY8p3fxoUJewLI3tVQj23tXcFeDsUfrwRvwd3rwwzfQ64ThKzZgesjVjUT0pm6Xr7bspWLLz8dCcbVj9yoRvawSbvvHikQ8fKwQxhK8jUdQDcESmzslpm3uKR15fSR/pcyIKVDN5ucSlDuWZq374vNesoKipiEvrWcz2d1Vx3ZsBLfiIG6Nb5KjdxAC8RKRgG5ZoVuqAt9XgNUK5zqbgR74kCZgvT5k/vE0fx1dR/NpneUSvyV8R1OeQ348kcMPIDLDW7nrID7F1quuj4av/wo56zxriPMx9CxxP4Trsqp803+YV7e/AWtdeW6FDQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b6139a0cc38453d014ff7f65e40131dd"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
+        <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
+        <attributes/>
+        <comment>Finds the equipment and software items listed on the template.</comment>
+        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>8</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:50</sys_created_on>
+        <sys_id>bfde9d2dc30c9fd014ff7f65e40131be</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>060b8556-5cd3-4415-99e4-7165261769e1</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VXW2vbMBT+K8avM8FO0rTrnkZKodALtKUvWxGyLCeisuVZctK05L/v6GLHS9yQQAIte2p1bvrO5fNRfr37LPHP/bN0GIY4Ojk7DcPBIAxHowHBURwPRiQO42HsB36OMwqWCsecwnGGeaXPkiCCFWKKZiBNmCw4Xjw55RgrzMXEu7JaMmU8KWnun/96DvwClxBS0dI/f19T7YqJ45hyMH10oNYwqkXRHJHRWdl12827tQpRJhpKGPj0VdE8oYAhxVzSwM9wnmAlykUjKSlO7nK+EkxZriAixJlSXtj/Mvwq2RsgOAu1R0ohP0KtrjkiVzIrTi+gYg+qrIiqSmdKpoIRKm1lEpriiqtxW2YN7grFRG5dbAGst+BVlt/awvhNgLpDIKkkgKCFTlnn4BJKH6Zifl+jvGS5qY5TckEwb05YqZLFldJ43n3KaQaBUIaLguUTVJRixowzYMl6Ew6HXsrFHC6VbJL3MNHAe1Bh3LsE+YURP+GS6SxuIAw4AyDGYVaQbaYUVWlKOUOEV9IoSpxLG8tfBr5cyDHHUq4yh5KjP5XGbevgMka2aNqFlKxQPyHEjLrklsFOBDkJV8NHRJ4wjUK2WbKQiCVXt5sUaWkOSQ+DqKbHuA2pC6YjyobsuiuAI0p0BKJARl+JKnD552PK/rNvS7BBAJudlZkZXA0BnLbZwnXQk9z7XYVh/7SecHvyvnlpgkwKqI8QF+IFVQUqKYG56rk/rvJ6s+j9YbaL/OEvlw0fyenW6T9ZDboUJQQyrW0RcpOIexNwBwg1Ae80Zbx48REqx7+UUZ50LapLrVhbVP3/fVF9SvYBoATZPrKcs9y8PwDo4Wj5714Kt2+B72sTZwattZa0DEuyyQbsKeG97c2JHeDUnHiAu71Hi6cDYr2SzMisr6Na6KgwOAIVBv3DUOG9SbgpaUf168en7mtt/6bt8bo9DGPLIVp2UW2vO6N97+wvN6k82IvL7bGzmosPpu/Ab9MPuBkc82MwBVd3H7JMRnOWTKha3V5bJULNMX/p0ruJQ3WjTHpHeOcOtxJ4FK3ICkyBrS2hee2HbgQvuM2vSRRY8X4fkx2w1OW4wa/efQOmE6H7oADn6cT0pv1FuWqkbsiHR3ndftrtWretk411977ED8XDUeL5Lzq+e+0dEQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=bfde9d2dc30c9fd014ff7f65e40131be"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <attributes/>
+        <comment>Creates the account with a lowercase User ID and email built from the name, the manager set and the job title filled in.</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:10</sys_created_on>
+        <sys_id>f2139a0cc38453d014ff7f65e40131e0</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>f1468ecd-d071-4d24-9324-70db1ffc546f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1W30/bMBD+Vyo/gUhD0rSh7V42gXhiTBqMF35ETnxpPTk/5jiFrur/vrOdpBWwsaJNE9L60PrOvvN3X+6+5npFOCNTEjLwJhM/TAI/CAaeNxgP/TgMYn/AAgp+TByS0wzw5IKKGiq0zQIdKZeVivTuTe15AVut0tHROGCTuE89z+8Pw9GkP6Zx2E+T4SgYhwGEo8DdhK3Xd4K+JkUXhRnqCuRWhpT1q0TyUgG7g4xy8dSd0ZzOQO50YxOD9ymuxG5ovxZxZKI2K8xDE8UXTSIlkVCHMF6Vgi6v/vP7d/hN5lwwCTmZXt86pKQSq1IgyXT1aOt3J0PQGAQePeUgWPXMqKhlqW0FGT5YBZEdHes/a4Ivm83eVbNZSKZB+Q6BBwU5A0STUlGBQ5AmRlUhl2Sqa3KIBMo+5WLZnZjzXGFSTDMHUdpVRh8q/h2B+KFnPjouBSw3AXuiM6OmB607PaGKXuBNiaplczSZFzzB4gxRDFJaC3W87bMHPpWKF7kNUTQWbXQh6iw/tzSRLkHb8ujBfosYlLpuXYktM72YF/efW5CnPDcMNSWLIqGis6hSkse10nBWBARkmCfKaFnyfBaVslhwE4xQMncm0HBTUdzjnRWf5a5umyJ3kWXqnqL/xLivqOS6iI+YBoPXDqmW1TGOSbUpBTmMvtUaiS2sKSEyLBgKzBiZYDMqH0yHtiVan8bcTZw2fnUUr8Tnkvf2UhYZwJEfRTNQUYKGKGbYbhZ2tSUKvYOeHorBkWt/0H45vBOEfVcVZ8U9yGNawd6+KwG7JYG9w5ub6uBw5jS57ff+OySiogtg7fN9hYS5u2uWptho05snsLvrPTxQlAlwsWut5x9xuw2ErNdrp32P8MEb/VQtYbgRx61R2LxL4DhFuu+f/gt+sd4dtftlNK12Xxpxeh5dK9+PfWfbsb1zu9HItvfnZXv8lgS7KejNK/ZTnTZw17c/AHDZ5jg6CwAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f2139a0cc38453d014ff7f65e40131e0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment>Notifies the manager that the new starter’s account is set up and the fulfilment tasks have been raised.</comment>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>11</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:50</sys_created_on>
+        <sys_id>f3de9d2dc30c9fd014ff7f65e40131c3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>97fad083-7c95-4645-a641-29a8065c51fa</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1a3W7bNhh9FULXlitblmynV12CbAX6MzRBd9EUBkVSNhdaVEUqjhsE2P0eYcAebk+yj/q3nThy6nYJ5hs75s/H830854iS8unG4tQ6sgZ05PhBOMBDx+27jjPqj8eBOw6d0XDs9Ai1OlaE5wxGJozIxPy+wiI1DfAn5SoWePmxbiEzLmjCIuvo0+eOFeMEJmuWWEc3a11tVxc4YAKGnuNkyjT6UKJYR6WXsflNJUnnLNITXja+KQKcFD3o9Qn0wCSDyulY7FqziDKAE2KhWMea44hiLZNl1ZIwTN9Hom6Y8UhDyFdKScKxZgrpGUNsjrlAC65nCKMcWBeWmjERtx48x9eKf4VM3L5ZN2RQMGIS4xHhFOBbjeZJUX/ofl13hydY4zOdpESnSbUtkhOm8tJTFuJU6ONmWz7gfay5jPIpGgeinC1FOo/e5RW3qgCNbU8VgGGxKaSpDCwOVQrPZnLxoQR7yqOs5EUJhSRYVL/CM4YTMjvlTBheROk8gLEdC2ud8CDVBiYwSMCoep1JBtWsBSOZYNm+z3Ec82g6iRN5xbMFAf68OxXwoxsKuYD5ik+jLiYm1y5sNe6eQvtJ1vwRJ9wk/hbCwOTbjqWW6lhgper0of6TL6lBnxdjFY6ZPcnYaSaThMf6FSx1xYpkbzuF9HrjbeSng5rkjZh7lV8LBLX8DBvuRlRIb6PtTXMuepd3FMLr7Si8nFGF7s5BPzr3g1w5SBfwCq3dP6DS18hZ1dc9unoaeqpU0lpQq8L5PuIAFqlJzvAit2zxR4jmIak4vh8EfuAN3ZqoYxLSYRD6eEjcmpgLMNhkjpPLSWawDb30NgVTWMduommBpRQNmLJIKUO/laC24SxUFEgJLhetSwiQvjjNqltJqP9N166cmkhLBJsplnARqiCZxvoSpWdYI66Qgt3qonOJeJFVY0YHLWWK5qnSMExDz4r4GhfBH7xqpfbB01V7QcKi9eROhj4LO9i/7L3t1ydcywnPJlo2xH5zE3rDkUvHgY0dp2cPfG9sj3Dg2yEZeO7Id5nvuV2QC56ypJtx7vYWbVrE4wPt5iotUq0uxXIz78I8FOxyNF3zjrOysfANd7tv5FfaTdvIBbx6CXWerqyei2oMcMHnPKNGrvf9C4luZRdzVghFyH5PmS0WL6l9fLyJZBdqDx55STxw+/lyu7f1GQLzVxgV7JvcLVYvyf3TGruDnentHej9v6O3t51gZIVSKg1+Z0Q3KP6OLZCCczFgRJjA9ig4SSPIf5rA35sCeHD8jseah9GX8jirsN+Vzy4y8Q8HnCekkv1LAm8lVdhfdVlJlw09XKSO45IYGcy25tFyTlgipQ6gMJdZJ72wLvJhzDxGAhHINNIolAnKJ6sYR4iYfMrxJtgEpGAyiLkQFxZoaClY1Z8T5QikJHjEXkI/kREwVDPKsx0vR2aJQncGz4TKcJe9cDNCJzrBkQI08yO4DSF+6Pm2O4SPwcjFNh558NGjg9BlrB+67u1tmcx28LAUygQfa1UvMQnTKNtjBZgAqOHSdTnR+cFpFHvGlOa0DGVE9yvEf03bpJlBsQvM2TeG7UgemmpmqTaDANy1roBKKTSP7RpsdrOWNZ7LeH1Ygaoc20M2+plpdAxjhJyiUlQqI2Hfn+qXKOSJ0tkD11bgMlsvR94bPw/xwsRoERMniVy0L33m9TYBpehdJ62s9M/ff92D8+GGezIBAyqjN+r62EXAU7WMUL33m5KahJhgyiZt6G+U1kR8bzQUyYZ6zTM2zmA8MrubF7IM8R4sF1VDURkHxZxcwrXf2N29HIHyt+de7nl2bug2B57fMeNuu4xkZpbFnv/xZ+vtyMu/25Y1Gp6a0fu+Rz3qDGz4GtgDZxDaAR37NuuFHgsIDekoeAZG3zaNg9GvGT0sf/D5/ft8XdYfYPNtyP/0bL41856jy8+wQgGD+hC4GQRr6yJz4GdfUh5n/ygCt4xIyVAvgMdgiupSwZQrls9JMFcwpYga5yE376fz/qL7+91P7Mf5n4yxHlxufy53OM0eTrMHmznYzOEw9V+7zOEwtethareXDS2eC1fv4vKnwhuPiYvXDDM9F2svGX45f/umfsUw3NubON/zXP/wkuGbX8XFC9qniYzjIrc9v477/C8TFxKgMS8AAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f3de9d2dc30c9fd014ff7f65e40131c3"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Create Catalog Task">af51fd0e73141300612c273ffff6a785</action_type>
+        <action_type_parent display_value="Create Catalog Task">f597c41073081300612c273ffff6a767</action_type_parent>
+        <attributes/>
+        <comment>Raises one fulfilment task per item, assigned to the fulfiller group.</comment>
+        <compiled_snapshot>af51fd0e73141300612c273ffff6a785</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>10</order>
+        <parent_ui_id>b0559ffb-e39a-4e6a-8222-69b7bb5ef973</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:50</sys_created_on>
+        <sys_id>fbde9d2dc30c9fd014ff7f65e40131c0</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>62c087be-f6b5-49a0-869d-676f0b7ac060</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1YWW/bOBD+K4aetoDjlS3fb90EBnbRA4iL7ENdCJQ0tIlSR0kqbtbIf9+hSNnyEcVG7CDFrp+sGXL0zfENOfq6cljkjB1Ce20auTDw2t2257r9difsDDyKvz4ZDIdO00lIDHrlwlck4OAXz03nnvBcy2WIcvkdJRGTGScPd3uKcMF4JCBxxl+/NZ2MCLSgQDjj1Y7qWEicBMBx6RcNqPHJAHoCp3rItHhP9uGQjVREGpfbdOCngiQCBEQJl9B0YpJERKXiYS0RQKLPCUeBEjk+L1ii0CCaWQDPzL+Y/JTsHwQwdPUGCuhrCEa3fvRt5IyY3hBFpmgyVLmwS8NFykKQJkoRUJJzdV2VmQWfM8XSxGwpHLa7U57HyScTH2dtYD9RVnHzVCJziVgh04HRrto40OkiXd6WzkxYUsTQKnkaEr5+IkoJFuRKw145wCFGQ35Msowlcz8T6T0rNiPkuDXn+NCiPF3iSyWbJy0Sav9amAfSmqD8phDfEcG0sx/RDG7Gt3C9p4CNYqmzjwlCBZMoFSwrY1Ogch6bjnyQ15xIuYkRJsf/kWvoJmLWad+EV28pDL1HRPdg/XtsWlYNvLoSJu5WtQr4kYNUEPlMQVxh1mqFwZrPQbTskmLB4+M+1U7m2BEAS47dlvAafxp4Ncgt1zZ1vk2124rcMq1dzzRDrA3R7IpapnmdbaZhHSDQEuIh0u25+OoUPAe36BSICBcTBlynOMnjwLDhVTiXYn78SKRZZp0uKHd+anmD2srtbxWoXKRCaUcKgzovG3ZNck4Z5+PGahW4vd6I0uAKvBG56kKfXA07nc5VfxQMgqAHdDTwWrp+Wtr0IQK+zNhp3D0iAiV3p9r/xs2W//XRsQyWWDLJfIe+01Jouds58ZQ8hrztjuu+3ZPyVzkCL3Ci1RdduFVYVLcgWeEa4kCQhaNzkebZLHddL1rNShrNnPHM+evjhwbyqCASiJnTnJn9hdLtd0d01BuFXjjUQNpdSge034Ou2/ba/V6xHH32WXTk+gMsfqswTzzbn09V2R8mZaIO5K68N0OMrivwTS537s5W2bizStsZvAt0hn5vrzNsLqaHGsQ1UoSn88YXs+QNNAtzm/nlewVLslzJ1vag9Uz/oLVFGXS2anBJmKp0D3efqebifiozjgBRMuNvA2EPk2VFkKYcSLJLB8zv7xMLzVKhewEqdN/uCWkHrcODpFX+R4/QZ6qv8qll3XND08J2B8MzDIBHgOG7Tb5sqNtz4FNgT58FexegyoFhEHHWDYM7Xr6BY+Plo6D5uPU6gyBOFUtfFu+/3BQ4CGrLt/I5sKzKe4tTnpdHRwApeVQW1l0FSQ3IchLjuVwEefgd1A6DplrT+KNUWRL1/x/KXnyiMOlTbGkYxU1G/ASgiOn67nExAqW5wKCWAdCtyk+LyCCGpVMSA1VLusH32zvUsCTkeQR+jOFhAt+8VoOqfAbV4aoAA+EvhXn72Qn77V/9RlkMaRgAAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=fbde9d2dc30c9fd014ff7f65e40131c0"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <attributes/>
+        <comment>Finds the template that matches the requested job title. It defines the standard access for that role.</comment>
+        <compiled_snapshot>9d09f99587003300663ca1bb36cb0ba3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <generation_source/>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:10</sys_created_on>
+        <sys_id>fe139a0cc38453d014ff7f65e40131de</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>8cae52fa-8678-4861-befe-b0e840d4faa2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VYUW/iOBD+K1GegUsISaBvp1ZIK+1tpS23L3sry4md4j3HzjpOW4r47zuJE4IgBaIDqdW9EXvG/mbm+8Y239c2I/aNTWbOLJnN/GnoOJ7nOEHgxdiNIi+IIyfCE3tgC5xSsNQ44hQ+nzAvyu8XNB47s3Hgo58pR7hADlKSU6RpmnGsS1PCcvi5+lZ7fIVpa9FOx0vGiaLCvvn+Y2BnWMFGmir7Zr03dS5SjiPKwXRRQ91DrlfZ9hNVc2bs866b9cVMSEVKKM7Api+aCkIBQ4J5Tgd2igXBWqrVdkRRTO4FbweWTGhYEdZZUp6ZXyl+ydkrIJg6pUdCIb6YmrntJ6pzZoaTO6zxg1ZFrAtVm8ZLyWKam8wQmuCC69vdMWNwn2kmhXExCTDekhep+GISY28XaEoEI0UOIGhWhlzGUAeUPCzl89cG5ZyJKjv1JJcx5tsvrLViUaFLPGubcprCQijFWcbEI8qUfGKVM2BJR48cPkYJl8+wac4exQjHJfARZBiP5jB+Vw1/w4qVUfwFy4AzAGIcuIJMMXNZqCqVTyjmRV5NKCxys5a9Gdj5Kr/lOM/byCHl6FdR4jZ5qCNGJmmlS6xYpv+EJZ5oHdxm0MjGP0rGWUu+WArCShT5jnZ+yghppjn9pwB/sl4nfjj1yCwaYsdxh5PAnw2nOAqGSTzxvWng0cD3Rluv9tdmcyizyy7eU6Sn89KI9HY3MV3JquV6MPa5a4Faru4V5DpxnI8kWNj8/em1vwJNCk7I0CVH6UZaZuVSaWRyuaPDQ/H0ZvwZEBrG35cctaLVW6hqwieMctJ1Ps3Lib3zafx/P5/eJd0BEEGmjkxwJqprBwC9lg78oySM3D3GVURrVVCN4Tw+VAO2tLRee2viDDiNJh5gb2th8HRAbM6AijL7/b8ZrKXgXUEK3vgyUlhvA96mtCP7zZ2zrGtj/1ra4317IOOOg7vpklqvPd2+e443h1L2eml5l3Zm5u4N9l34SvqGNgfXbAZLcK33Q0bJ6JmRR6rb3RsrIvUz5v92zdeMQ02hqvCucL11j761op3rLUtQCpVjGdzCFY2BHDnCiqJEFoKg+v7dEqmsZMJUrmvjjkciBf0IS4JELb2kVmVtba17Hs6n42hS+SmxmkDq3XILArGqQKxtIP3C7tO+Jle5ul66fc0x41Vd4JGV7RSWKiXVGy3sREmPcOPM/nYmKPeioP57A+wSQ2cjPIH1Q7zYL9+kYoqjyRgHoee68LB1SOhMw9CdBlES4HCStGpFKBcx9FVYOQGqwPKooUZTZ+ewE5nm2rflnIGqoeCdFOUTfRxqq4QF9bUaWKeB160lkpJTLPZ6ywJOjD/mNf6ar/477i8f4p+sgi32c26GOrN+rbtEwf4W7FdBP5Vkm1JnPHVJPJyGbjicJCQYzgj2h3gW+aFHaDxJLnk9+PEb/T+hAjYWAAA=</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=fe139a0cc38453d014ff7f65e40131de"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=a6139a0cc38453d014ff7f65e4013185^sys_idNOT IN6c85b1a0c30c57d014ff7f65e40131ef,73de9d2dc30c9fd014ff7f65e40131d5,79f254d9c30cdbd014ff7f65e40131a2,f4d4c32cc3c497d014ff7f65e40131a5"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">df9d69acc38857d014ff7f65e40131bd</block>
+        <comment>Loops through each group the lookup returned.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 07:13:48</sys_created_on>
+        <sys_id>6c85b1a0c30c57d014ff7f65e40131ef</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>0c014cfb-88fb-49b3-83c6-3bbbc4e93026</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/61TwW7iMBD9F58hSgKEwK1qVQmpu5Wg6mVVoYk9BmsdO2s70Czi33dMAlQ97ymZ55k3773EJ2bb0LTBv9kH79XOsOWvjxFTJmL0fmJS2+OL3Sm+Mj6A4bjp/EqwJZvNF6JYAOeTspzNRZpNpZzLYobTNJtklWQjZqBG6lQBa0/lAXQb69Op5ICzXMK4LObleFoW2bhCieMqxXKaiqkEyJM1cutEIlBCq8N252zbnM/EI5RvNHTv/4mO75UWDgfrDThSHdCx5enbkYq2s4WQiyxd8EleTPI0zctpVhWTKsvFBFAURKihQk2tq8H3txhC18TSXfRcgZdhZn1D6RFF5OmI4WdAI5DWS9AeR6wGIyBY17FlcC0BDkG8Gt3dOvbKBKIjnj3qpn+r4dOrv7Q7S9M4IpGscewPb+V2iLeH5RME2NASHlo3tPK9VRx9H8qQ5+NXrG94bYKyph8JUOnrtNVtbX72mbAbwfVrEtJ6EoFNtBxNDI7kZm+P66vKZ2Uu8QyH2nLQtwpCcKpqQ9RzYqixJqJtDU2jzG7bOHtQl2HSUic7TUUSf3NaGq9AAjwKTyhhSJ4Jf7rA7+BUdPGDaGj4PGK+848avL97oRC3f9qopHc2eNj2McQR7lQTHmjBAQe55494M3ruW6ZceZLwFrHV9S7Gg47+pXgV79DRut9R/B07/wPufG5v1QMAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">66de1d2dc30c9fd014ff7f65e4013141</block>
+        <comment>Loops through each item the lookup returned.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>9</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:50</sys_created_on>
+        <sys_id>73de9d2dc30c9fd014ff7f65e40131d5</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>b0559ffb-e39a-4e6a-8222-69b7bb5ef973</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/51TwW7jIBD9F86JZRzHqXOrWlWK1N1KSdXLqoowDAlaDF7ASb1W/n2H2nGqHvdk5s3Mm/fG0BPbhqYN/tXee68Ohqx/vc+IMhHDc0+ktudne1B8Y3xghsOu8xtB1qSSkpc0K/ki5aUUKc2lXMliCXlKF3SVkxkxrAasVAFqj+GJ6TbGfZ8WaXW3XBbzJReLeZ7T5bwsIZ+vaLHMCroqSqDJFrh1wl8u2CqUbzTr3v6fgR+VFg5Ggw1zqC2AI+v+W0pFc7QUsqQpmsuKRZam2V1Oq2JR0UwsGIgCCTWrQGPpZnT3zWzomhi6QcIIPI892wnFTxSRpTMCHwGMABwvmfYwIzUzggXrOrIOrkXAARMvRndTxVGZgHTIcwTdDKeafXj1F2fTNI0tEtAahyE5hftxowMsH1lgOxzCQ+vGUn60ioMfliJAslaHh6/YUPDSBGXN0BJYpa/dVre1+TnshEwE1x+ISOtRBDTRcjQxOpK7oz1vryqflPlcz5jUljM9RSwEp6o2RD09AQ01Eu1r1jTKHPaNsyf12Yxa6uSgMUjiZcah8aInjEfhCW6YJU+IP37Cb8yp6OIH0mDzZUZ85x808/7mBZe4/9NGJYOz0cN+WENs4U414R4HnGCUe3mP93/gnnbKlUcJrxHbXF9cTHR4l+KDu0Fn635H8Tfs8g+vH7qauwMAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">30f214d9c30cdbd014ff7f65e4013184</block>
+        <comment>Checks whether the manager rejected the request.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>14</order>
+        <outputs_assigned/>
+        <parent_ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 07:58:43</sys_created_on>
+        <sys_id>79f254d9c30cdbd014ff7f65e40131a2</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:03</sys_updated_on>
+        <ui_id>608712fd-b689-4720-a75d-2609fe312c7f</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1VTU8bMRD9K8jnTeT9CiE3BEVCokUqiEuLVrP+SNx67a3tBdIo/73j3U2CKhBC5djb+o1n5r0XP2VDbBfaLvhbe+q9Whqy+HafEGUiht8bIrV9vLJLxS6ND2CYuFn7S04WpChkmhbpCcsp4zWnaSHlsZyVoqBpnh7PSEIMNAJvMmu4CsqaqgcS8gC6i4VPT8HBETAmvD9y4odgQXCsc+VbDeu7N66xldLciZFzCw6nB+HIYvNXSUW+koJEtinLs1meUZrNi7Se5XWa8RwE5DhQQy00Xj3bET666pHXlYR1G3EfnDLL8Xw1TrnZgdbxyCqlCRFPQRiO7BcStBcJacBwCNat94gTwK+NPgArZQKOw0Erodvhq4Enr37j6qwsY4sUKJaJobg/VqORAyzPIQCS6ljo3HiVraxCWwebuJDQ6XD2HBsuXLdR9NASoNa7bqu7xnwZvCH7AbvfDZHOIwnRRs1RxKhI3qzs49cdywtlen/GorYM9P4EAV2suxD5bIjQosFBVQNti95WrbMPqm9GLs10qfEwjS8Wl8bXPAUWiU/RYpheIH7ew3fgVFTxGcdg80CzBq9Y1b98HIc2CbJNiF/7Mw3eH0Siu9WvLlIcJI/iqsGf2MKcasMpbn4Qo45t8rFBepahzYbO0xlOkJPjk2I2KaRgkxqHTCTMs3mJb1vU2RSVolegK9wdxHb7vaM0569n7qPGvi+jJ1DKMqXlyxktZi9l9GV73hPM7I1gxrfw7lxSSv8H85+DqXw1xGnU1i//wFzexyANO/deM+WR2m3ELnf/g7GwxmcW03uAHq37GUUdsO0fFPr5FVEHAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">fdc4032cc3c497d014ff7f65e40131c2</block>
+        <comment>Checks whether the requester asked for access beyond the template. If not, the flow ends here.</comment>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="JML Joiner Flow">a6139a0cc38453d014ff7f65e4013185</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>12</order>
+        <outputs_assigned/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-17 13:00:21</sys_created_on>
+        <sys_id>f4d4c32cc3c497d014ff7f65e40131a5</sys_id>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:02</sys_updated_on>
+        <ui_id>08bb7b0d-3da7-4ee9-ae8b-7ed4d38c55b2</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+1V22rbQBD9lbDPstHFki9vwUnAkEupTaCUIEZ7sZeuVop2lcQ1/vfOamU7tCkhNI99056dmT3neA7ekaq1dWvNqjo3Rq41mX1/CIjUDsPvHRGqer6u1pIutLGgKV9uzYKRGRnHlBcxUJpMRtMxC6OREGORpXwURknEYhIQDSXHSlppJq2sdN4BAXkC1bqLyxfbwBmO4MacNfyx5cZyhgVMmlrB9v69OrqRijW8Z11Dg/Mtb8hs99uVdIxFCCKa0ogmcZbEYRhPRlGRJUUUswQ4JDhQQcEVls4PlM+uO+TvWuy2drixjdTr/nzdT1kewKphjlUUBoS/WK4Zsp8JUIYHpATNwFbN9og0HNidVidgI7XFcThow1Xtv0p4MfInPh2nqWsRHMVS7i+Px7x30sPiAiwgqZbatulL6aaS6Ku3iXEBrbLz15gvuKudaN9ioVCH7kq1pb713pDjgMMPh0hrkASvnWYnolcklpvq+euB5ZXUnT/9paooqOMJLLpYtNbx2RGueImD8hLqGr3N66Z6kl0zcimHa4WHodtZfNTt8xCoIz5Ei2F4hfhFB99DI52KGxyDzZ5mAUbSvNt9HIc2cbIPiNmauQJjTiLR3fyxdRS95F5c7v1xLbSRtT3Hl594r2MffG6UXqVotxPpeJKwaTGAMIwGoyydDiZQZANBR2kyyRKepckQmO8Elfsk5ZpzXMT9frG8vVtd3nxZffszep87/GN5nUIq0ihM387rKHsrr29b9ZGQxu+E1O3FhzMahuH/kP5zSKXJfbR6bd3jn5jRBxcq/+bRayoNUls5bHH4V3QXW1wzl+QT9Fw1P5yoE7b/BUnQxWNfBwAA</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=a6139a0cc38453d014ff7f65e4013185^sys_idNOT IN08eedd2dc30c9fd014ff7f65e4013151,368a4e51c38c1fd014ff7f65e40131b5,40eedd2dc30c9fd014ff7f65e4013151,4ceedd2dc30c9fd014ff7f65e4013151,7a8a4e51c38c1fd014ff7f65e40131b5"/>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>a6139a0cc38453d014ff7f65e4013185</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:51</sys_created_on>
+        <sys_id>08eedd2dc30c9fd014ff7f65e4013151</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:51</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>8abc6f56-3756-483a-a85a-a1d4f3ee2f33</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>a6139a0cc38453d014ff7f65e4013185</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 16:41:10</sys_created_on>
+        <sys_id>368a4e51c38c1fd014ff7f65e40131b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-19 16:41:10</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>1d51a6bb-a101-43b3-82bf-61c77a7a132c</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>a6139a0cc38453d014ff7f65e4013185</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.last_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:51</sys_created_on>
+        <sys_id>40eedd2dc30c9fd014ff7f65e4013151</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:51</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>665d5d04-5d54-404f-bd96-e1f5ebcdfd8b</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>a6139a0cc38453d014ff7f65e4013185</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.first_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-20 08:08:51</sys_created_on>
+        <sys_id>4ceedd2dc30c9fd014ff7f65e4013151</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-20 08:08:51</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>a88143c7-c79e-42d2-b9fc-a5c57b37679b</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>a6139a0cc38453d014ff7f65e4013185</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{f5783d9b-a001-4659-8ab6-fc453863e653.last_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-19 16:41:10</sys_created_on>
+        <sys_id>7a8a4e51c38c1fd014ff7f65e40131b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-19 16:41:10</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>946034b4-3fb3-4654-9433-6b8e580b7833</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_flow_variable action="delete_multiple" query="model=a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_variable_a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_item</element>
+        <help/>
+        <hint/>
+        <label>Request Item</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6139a0cc38453d014ff7f65e4013185</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:09</sys_created_on>
+        <sys_id>3a139a0cc38453d014ff7f65e40131d0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 20:06:09</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6139a0cc38453d014ff7f65e4013185</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:09</sys_created_on>
+        <sys_id>aa139a0cc38453d014ff7f65e40131b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-15 20:06:09</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_a6139a0cc38453d014ff7f65e4013185"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>5d912944c3cc13d014ff7f65e40131ef</sys_id>
+        <latest_snapshot>a6139a0cc38453d014ff7f65e4013185</latest_snapshot>
+        <compiler_build>glide-brazil-08-25-2026__patch0-08-26-2026_09-22-2026_1636.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=5d912944c3cc13d014ff7f65e40131ef^sys_idNOT IN1f13da0cc38453d014ff7f65e401313f"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"1f13da0cc38453d014ff7f65e401313f","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>5d912944c3cc13d014ff7f65e40131ef</plan_id>
+        <snapshot>dd1c9587c380531014ff7f65e4013104</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-15 20:06:12</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1f13da0cc38453d014ff7f65e401313f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-24 23:20:04</sys_updated_on>
+        <trigger display_value="">9b13da0cc38453d014ff7f65e401313e</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=5d912944c3cc13d014ff7f65e40131ef"/>
+</record_update>

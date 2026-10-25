@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_catalog">
+    <sc_cat_item_catalog action="INSERT_OR_UPDATE">
+        <sc_cat_item display_value="Software Access">3c84a58bc3c0531014ff7f65e401319e</sc_cat_item>
+        <sc_catalog display_value="Service Catalog">e0d08b13c3330100c8b837659bba8fb4</sc_catalog>
+        <sys_class_name>sc_cat_item_catalog</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-25 00:24:21</sys_created_on>
+        <sys_id>fc84a5cbc3c0531014ff7f65e40131c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Service Catalog.Software Access</sys_name>
+        <sys_package display_value="JML Automation" source="x_2209265_jml_au_0">3a3cc6cbc3b30b9014ff7f65e4013112</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="JML Automation">3a3cc6cbc3b30b9014ff7f65e4013112</sys_scope>
+        <sys_update_name>sc_cat_item_catalog_fc84a5cbc3c0531014ff7f65e40131c4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-25 00:24:21</sys_updated_on>
+    </sc_cat_item_catalog>
+</record_update>
