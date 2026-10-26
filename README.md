@@ -1,6 +1,6 @@
 # JML Automation: Joiner, Mover, Leaver on ServiceNow
 
-A ServiceNow scoped application that automates the employee access lifecycle. This repository documents the build, the design decisions and the test evidence. It is the final project for the RiseUp with ServiceNow programme, built by Kunmi Adejumo as part of a move into Identity and Access Management (IAM).
+A ServiceNow scoped application that automates the employee access lifecycle. This repository documents the build, the design decisions and the test evidence. It is a personal side project, built by me as part of my move into Identity and Access Management (IAM).
 
 **Status:** Joiner flow and task completion flow built and tested. Mover, Leaver and reporting are in progress (see the [roadmap](#roadmap)).
 
